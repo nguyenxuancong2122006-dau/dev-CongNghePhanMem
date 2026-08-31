@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Thông tin cá nhân - Cong Store</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #1e3a8a;
+            padding: 18px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: #93c5fd;
+        }
+
+        .logout {
+            background: white;
+            color: #1e3a8a !important;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 50px auto;
+        }
+
+        /* ================= PROFILE BOX ================= */
+
+        .profile-box {
+            background: white;
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            color: #1e3a8a;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #666;
+        }
+
+        /* ================= MESSAGE ================= */
+
+        .message {
+            padding: 12px 15px;
+            margin-bottom: 20px;
+
+            background: #dcfce7;
+            color: #166534;
+
+            border-radius: 8px;
+
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-family: Arial, sans-serif;
+
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            height: 110px;
+
+            resize: vertical;
+        }
+
+        /* ================= EMAIL ================= */
+
+        .email-note {
+            color: #888;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .update-button {
+            width: 100%;
+
+            padding: 13px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .update-button:hover {
+            background: #1e40af;
+
+            transform: translateY(-1px);
+        }
+
+        /* ================= BACK ================= */
+
+        .back {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .profile-box {
+                padding: 25px 20px;
+            }
+
+            .title h1 {
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 Cong Store
+    </div>
+
+
+    <div class="menu">
+
+        <a href="{% url 'home' %}">
+            🏠 Trang chủ
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒 Giỏ hàng
+        </a>
+
+        <a href="{% url 'orders' %}">
+            📦 Đơn hàng
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout">
+            Đăng xuất
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= PROFILE ================= -->
+
+<div class="container">
+
+    <div class="profile-box">
+
+
+        <!-- TIÊU ĐỀ -->
+
+        <div class="title">
+
+            <h1>
+                👤 Thông tin cá nhân
+            </h1>
+
+            <p>
+                Quản lý thông tin tài khoản của bạn
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= THÔNG BÁO ================= -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="message">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+
+        <!-- ================= FORM ================= -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- HỌ TÊN -->
+
+            <div class="form-group">
+
+                <label for="full_name">
+                    Họ và tên
+                </label>
+
+                <input
+                    type="text"
+                    id="full_name"
+                    name="full_name"
+                    value="{{ user.get_full_name }}"
+                    placeholder="Nhập họ và tên"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ user.email }}"
+                    placeholder="Nhập email"
+                    required
+                >
+
+                <div class="email-note">
+                    Email được sử dụng để đăng nhập tài khoản.
+                </div>
+
+            </div>
+
+
+
+            <!-- SỐ ĐIỆN THOẠI -->
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Số điện thoại
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value="{{ customer.phone }}"
+                    placeholder="Nhập số điện thoại"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- ĐỊA CHỈ -->
+
+            <div class="form-group">
+
+                <label for="address">
+                    📍 Địa chỉ nhận hàng
+                </label>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    placeholder="Nhập địa chỉ nhận hàng"
+                    required
+                >{{ customer.address }}</textarea>
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="update-button"
+            >
+
+                💾 Cập nhật thông tin
+
+            </button>
+
+        </form>
+
+
+
+        <!-- QUAY LẠI -->
+
+        <a
+            href="{% url 'home' %}"
+            class="back"
+        >
+
+            ← Quay lại cửa hàng
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 - Cong Store
+    </p>
+
+    <p>
+        Nguyễn Xuân Công - 24CT1
+    </p>
+
+    <p>
+        Website bán hàng trực tuyến
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

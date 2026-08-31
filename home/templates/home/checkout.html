@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thanh toán - Cong Store</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: #1e3a8a;
+            padding: 18px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            color: #93c5fd;
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           CHECKOUT LAYOUT
+        ========================= */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 25px;
+        }
+
+
+        /* =========================
+           BOX
+        ========================= */
+
+        .checkout-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+            margin-bottom: 25px;
+        }
+
+        .checkout-box h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+
+        /* =========================
+           PAYMENT
+        ========================= */
+
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            padding: 14px;
+
+            margin-bottom: 10px;
+
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            border-color: #2563eb;
+            background: #f8faff;
+        }
+
+        .payment-option label {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .payment-option small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            margin-left: 23px;
+        }
+
+
+        /* =========================
+           PRODUCT
+        ========================= */
+
+        .order-item {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 70px;
+            height: 70px;
+
+            background: #eef2ff;
+
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 30px;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: bold;
+            color: #1e3a8a;
+
+            margin-bottom: 5px;
+        }
+
+        .product-quantity {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .product-price {
+            color: #e11d48;
+            font-weight: bold;
+
+            text-align: right;
+        }
+
+
+        /* =========================
+           PROMOTION
+        ========================= */
+
+        .promotion {
+            display: flex;
+            gap: 10px;
+        }
+
+        .promotion input {
+            flex: 1;
+        }
+
+        .promotion-note {
+            color: #666;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 10px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #555;
+        }
+
+        .summary-value {
+            font-weight: bold;
+        }
+
+        .discount {
+            color: #16a34a;
+        }
+
+        .final-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-top: 20px;
+            padding-top: 20px;
+
+            border-top: 2px solid #eee;
+
+            font-size: 22px;
+        }
+
+        .final-price {
+            color: #e11d48;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .order-button {
+            display: block;
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .order-button:hover {
+            background: #1e40af;
+        }
+
+        .back-cart {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .back-cart:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 Cong Store
+    </div>
+
+    <div class="menu">
+
+        <a href="{% url 'home' %}">
+            🏠 Trang chủ
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒 Giỏ hàng
+        </a>
+
+        <a href="{% url 'profile' %}">
+            👤 Tài khoản
+        </a>
+
+        <a href="{% url 'orders' %}">
+            📦 Đơn hàng
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Đăng xuất
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     CONTAINER
+===================================================== -->
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h1>💳 Thanh toán</h1>
+
+        <p>Kiểm tra thông tin trước khi đặt hàng</p>
+
+    </div>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <div class="checkout-layout">
+
+
+            <!-- =================================================
+                 CỘT TRÁI
+            ================================================== -->
+
+            <div>
+
+
+                <!-- =========================
+                     THÔNG TIN NHẬN HÀNG
+                ========================== -->
+
+                <div class="checkout-box">
+
+                    <h2>
+                        📍 Thông tin nhận hàng
+                    </h2>
+
+
+                    <div class="form-group">
+
+                        <label for="full_name">
+                            Họ và tên người nhận
+                        </label>
+
+                        <input
+                            type="text"
+                            id="full_name"
+                            name="full_name"
+
+                            value="{% if customer %}{{ customer.user.first_name }} {{ customer.user.last_name }}{% endif %}"
+
+                            placeholder="Nhập họ và tên"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Số điện thoại
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+
+                            value="{% if customer %}{{ customer.phone }}{% endif %}"
+
+                            placeholder="Nhập số điện thoại"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Địa chỉ nhận hàng
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="Nhập địa chỉ nhận hàng"
+                            required
+                        >{% if customer %}{{ customer.address }}{% endif %}</textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="note">
+                            Ghi chú đơn hàng
+                        </label>
+
+                        <textarea
+                            id="note"
+                            name="note"
+                            placeholder="Ví dụ: Giao hàng giờ hành chính..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     PHƯƠNG THỨC THANH TOÁN
+                ========================== -->
+
+                <div class="checkout-box">
+
+                    <h2>
+                        💰 Phương thức thanh toán
+                    </h2>
+
+
+                    <div class="payment-option">
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="COD"
+                                checked
+                            >
+
+                            💵 Thanh toán khi nhận hàng (COD)
+
+                        </label>
+
+                        <small>
+                            Thanh toán trực tiếp cho nhân viên giao hàng.
+                        </small>
+
+                    </div>
+
+
+                    <div class="payment-option">
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="BANK"
+                            >
+
+                            🏦 Chuyển khoản ngân hàng
+
+                        </label>
+
+                        <small>
+                            Chuyển khoản trước khi nhận hàng.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 CỘT PHẢI
+            ================================================== -->
+
+            <div>
+
+
+                <!-- =========================
+                     SẢN PHẨM
+                ========================== -->
+
+                <div class="checkout-box">
+
+                    <h2>
+                        🛍️ Đơn hàng của bạn
+                    </h2>
+
+
+                    {% for item in items %}
+
+                        <div class="order-item">
+
+
+                            <div class="product-image">
+
+                                {% if item.product.image %}
+
+                                    <img
+                                        src="{{ item.product.image.url }}"
+                                        alt="{{ item.product.name }}"
+                                    >
+
+                                {% else %}
+
+                                    🛍️
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="product-info">
+
+                                <div class="product-name">
+                                    {{ item.product.name }}
+                                </div>
+
+                                <div class="product-quantity">
+                                    Số lượng: {{ item.quantity }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="product-price">
+
+                                {{ item.subtotal|floatformat:0 }}đ
+
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- =========================
+                     MÃ GIẢM GIÁ
+                ========================== -->
+
+                <div class="checkout-box">
+
+                    <h2>
+                        🎟️ Mã giảm giá
+                    </h2>
+
+
+                    <div class="promotion">
+
+                        <input
+                            type="text"
+                            name="promotion_code"
+                            placeholder="Nhập mã giảm giá"
+                        >
+
+                    </div>
+
+
+                    <div class="promotion-note">
+
+                        Nếu bạn có mã giảm giá, hãy nhập vào đây.
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     TỔNG TIỀN
+                ========================== -->
+
+                <div class="checkout-box">
+
+                    <h2>
+                        💰 Tổng thanh toán
+                    </h2>
+
+
+                    <div class="summary-row">
+
+                        <span class="summary-label">
+                            Tạm tính
+                        </span>
+
+                        <span class="summary-value">
+
+                            {{ subtotal|floatformat:0 }}đ
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span class="summary-label">
+                            Giảm giá
+                        </span>
+
+                        <span class="summary-value discount">
+
+                            -{{ discount|floatformat:0 }}đ
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="final-total">
+
+                        <span>
+                            Tổng cộng
+                        </span>
+
+                        <span class="final-price">
+
+                            {{ total|floatformat:0 }}đ
+
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="order-button"
+                    >
+
+                        🛍️ ĐẶT HÀNG
+
+                    </button>
+
+
+                    <a
+                        href="{% url 'cart' %}"
+                        class="back-cart"
+                    >
+
+                        ← Quay lại giỏ hàng
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>© 2026 - Cong Store</p>
+
+    <p>Nguyễn Xuân Công - 24CT1</p>
+
+    <p>Website bán hàng trực tuyến</p>
+
+</footer>
+
+
+</body>
+
+</html>

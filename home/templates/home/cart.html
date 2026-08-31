@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giỏ hàng - Cong Store</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        .navbar {
+            background: #1e3a8a;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            color: #93c5fd;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .cart-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto auto;
+            gap: 20px;
+            align-items: center;
+
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background: #eef2ff;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 45px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .product-price {
+            color: #e11d48;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity a {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #2563eb;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 6px;
+
+            font-weight: bold;
+        }
+
+        .quantity span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .subtotal {
+            color: #e11d48;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: right;
+        }
+
+        .remove {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .total {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+
+            margin-top: 25px;
+            font-size: 22px;
+        }
+
+        .total-price {
+            color: #e11d48;
+            font-weight: bold;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+
+            margin-top: 25px;
+            padding: 14px;
+
+            background: #2563eb;
+            color: white;
+
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .checkout-button:hover {
+            background: #1e40af;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .empty h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+            }
+
+            .product-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .quantity,
+            .subtotal,
+            .remove {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .total {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 Cong Store
+    </div>
+
+    <div class="menu">
+
+        <a href="{% url 'home' %}">
+            🏠 Trang chủ
+        </a>
+
+        <a href="{% url 'profile' %}">
+            👤 Tài khoản
+        </a>
+
+        <a href="{% url 'orders' %}">
+            📦 Đơn hàng
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Đăng xuất
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="title">
+
+        <h1>🛒 Giỏ hàng</h1>
+
+        <p>Các sản phẩm bạn đã chọn</p>
+
+    </div>
+
+
+    <div class="cart-box">
+
+        {% if items %}
+
+            {% for item in items %}
+
+                <div class="cart-item">
+
+                    <!-- HÌNH ẢNH -->
+
+                    <div class="product-image">
+
+                        {% if item.product.image %}
+
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                            >
+
+                        {% else %}
+
+                            🛍️
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- THÔNG TIN -->
+
+                    <div>
+
+                        <div class="product-name">
+                            {{ item.product.name }}
+                        </div>
+
+                        <div class="product-price">
+
+                            {{ item.product.price|floatformat:0 }}đ
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SỐ LƯỢNG -->
+
+                    <div class="quantity">
+
+                        <a href="{% url 'decrease_cart' item.id %}">
+                            −
+                        </a>
+
+                        <span>
+                            {{ item.quantity }}
+                        </span>
+
+                        <a href="{% url 'increase_cart' item.id %}">
+                            +
+                        </a>
+
+                    </div>
+
+
+                    <!-- THÀNH TIỀN -->
+
+                    <div class="subtotal">
+
+                        {{ item.subtotal|floatformat:0 }}đ
+
+                    </div>
+
+
+                    <!-- XÓA -->
+
+                    <a
+                        href="{% url 'remove_from_cart' item.id %}"
+                        class="remove"
+                        onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')"
+                    >
+
+                        🗑️ Xóa
+
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+
+            <!-- TỔNG -->
+
+            <div class="total">
+
+                <span>
+                    Tổng tiền:
+                </span>
+
+                <span class="total-price">
+
+                    {{ cart.total_price|floatformat:0 }}đ
+
+                </span>
+
+            </div>
+
+
+            <!-- ĐẶT HÀNG -->
+
+            <a
+                href="{% url 'checkout' %}"
+                class="checkout-button"
+            >
+
+                💳 Tiến hành đặt hàng
+
+            </a>
+
+
+        {% else %}
+
+            <div class="empty">
+
+                <h2>
+                    🛒 Giỏ hàng đang trống
+                </h2>
+
+                <p>
+                    Bạn chưa có sản phẩm nào trong giỏ hàng.
+                </p>
+
+                <a
+                    href="{% url 'home' %}"
+                    class="back"
+                >
+
+                    ← Tiếp tục mua sắm
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>© 2026 - Cong Store</p>
+    <p>Nguyễn Xuân Công - 24CT1</p>
+    <p>Website bán hàng trực tuyến</p>
+
+</footer>
+
+</body>
+
+</html>

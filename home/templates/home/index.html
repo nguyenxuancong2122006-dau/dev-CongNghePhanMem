@@ -41,7 +41,7 @@
         .menu {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
         }
 
         .menu a {
@@ -61,6 +61,11 @@
             padding: 9px 15px;
             border-radius: 8px;
             font-weight: bold;
+        }
+
+        .account {
+            color: white;
+            text-decoration: none;
         }
 
         /* ================= HERO ================= */
@@ -151,7 +156,6 @@
             text-align: center;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: 0.3s;
-            cursor: pointer;
         }
 
         .category:hover {
@@ -195,7 +199,17 @@
             justify-content: center;
             align-items: center;
             background: #eef2ff;
-            font-size: 100px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .no-image {
+            font-size: 90px;
         }
 
         .product-info {
@@ -206,6 +220,13 @@
             color: #1e3a8a;
             margin-bottom: 10px;
             font-size: 20px;
+        }
+
+        .category-name {
+            color: #7c3aed;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
 
         .description {
@@ -219,6 +240,19 @@
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 15px;
+        }
+
+        .stock {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .in-stock {
+            color: #16a34a;
+        }
+
+        .out-stock {
+            color: #dc2626;
         }
 
         .buy-button {
@@ -238,6 +272,42 @@
 
         .buy-button:hover {
             background: #1e40af;
+        }
+
+        .disabled-button {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .disabled-button:hover {
+            background: #9ca3af;
+        }
+
+        /* ================= MESSAGE ================= */
+
+        .messages {
+            width: 85%;
+            max-width: 1100px;
+            margin: 20px auto 0;
+        }
+
+        .message {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 15px;
+            color: #666;
         }
 
         /* ================= PROMOTION ================= */
@@ -387,518 +457,541 @@
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
 
-    <nav class="navbar">
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-        <div class="logo">
-            🛒 Cong Store
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 Cong Store
+    </div>
+
+    <div class="menu">
+
+        <a href="{% url 'home' %}">
+            Trang chủ
+        </a>
+
+        <a href="#danhmuc">
+            Danh mục
+        </a>
+
+        <a href="#sanpham">
+            Sản phẩm
+        </a>
+
+        <a href="#lienhe">
+            Liên hệ
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'profile' %}" class="account">
+                👤 {{ user.first_name|default:user.username }}
+            </a>
+
+            <a href="{% url 'logout' %}" class="account">
+                Đăng xuất
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}" class="account">
+                🔐 Đăng nhập
+            </a>
+
+            <a href="{% url 'register' %}" class="account">
+                📝 Đăng ký
+            </a>
+
+        {% endif %}
+
+
+        <a href="{% url 'cart' %}" class="cart">
+            🛒 Giỏ hàng
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
+
+{% if messages %}
+
+<div class="messages">
+
+    {% for message in messages %}
+
+        <div class="message">
+            {{ message }}
         </div>
 
-        <div class="menu">
+    {% endfor %}
 
-            <a href="#">Trang chủ</a>
+</div>
 
-            <a href="#danhmuc">
-                Danh mục
-            </a>
-
-            <a href="#sanpham">
-                Sản phẩm
-            </a>
-
-            <a href="#lienhe">
-                Liên hệ
-            </a>
-
-            <a href="#" class="cart">
-                🛒 Giỏ hàng
-            </a>
-
-        </div>
-
-    </nav>
+{% endif %}
 
 
-    <!-- ================= HERO ================= -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-    <section class="hero">
+<section class="hero">
 
-        <div class="hero-content">
+    <div class="hero-content">
 
-            <h1>
-                Chào mừng đến với Cong Store
-            </h1>
+        <h1>
+            Chào mừng đến với Cong Store
+        </h1>
 
-            <p>
-                Cửa hàng trực tuyến cung cấp những sản phẩm
-                chất lượng với giá tốt nhất.
-                <br>
-                Mua sắm dễ dàng - Nhanh chóng - Uy tín.
-            </p>
+        <p>
+            Cửa hàng trực tuyến cung cấp những sản phẩm
+            chất lượng với giá tốt nhất.
+            <br>
+            Mua sắm dễ dàng - Nhanh chóng - Uy tín.
+        </p>
 
-            <a href="#sanpham" class="button">
-                🛍️ Mua sắm ngay
-            </a>
+        <a href="#sanpham" class="button">
+            🛍️ Mua sắm ngay
+        </a>
 
-        </div>
+    </div>
 
-    </section>
-
-
-    <!-- ================= DANH MỤC ================= -->
-
-    <section class="container" id="danhmuc">
-
-        <div class="title">
-
-            <h2>
-                Danh mục sản phẩm
-            </h2>
-
-            <p>
-                Khám phá các sản phẩm đang được bán tại cửa hàng
-            </p>
-
-        </div>
+</section>
 
 
-        <div class="categories">
+<!-- =====================================================
+     DANH MỤC
+===================================================== -->
+
+<section class="container" id="danhmuc">
+
+    <div class="title">
+
+        <h2>
+            Danh mục sản phẩm
+        </h2>
+
+        <p>
+            Khám phá các sản phẩm đang được bán tại cửa hàng
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+        {% for category in categories %}
 
             <div class="category">
 
                 <div class="icon">
-                    📱
+
+                    {% if category.name == "Điện thoại" %}
+                        📱
+
+                    {% elif category.name == "Laptop" %}
+                        💻
+
+                    {% elif category.name == "Phụ kiện" %}
+                        🎧
+
+                    {% elif category.name == "Đồng hồ" %}
+                        ⌚
+
+                    {% else %}
+                        🛍️
+                    {% endif %}
+
                 </div>
 
                 <h3>
-                    Điện thoại
+                    {{ category.name }}
                 </h3>
 
+                {% if category.description %}
+
+                    <p style="margin-top: 8px; color: #666;">
+                        {{ category.description }}
+                    </p>
+
+                {% endif %}
+
             </div>
 
+        {% empty %}
 
-            <div class="category">
-
-                <div class="icon">
-                    💻
-                </div>
+            <div class="empty">
 
                 <h3>
-                    Laptop
-                </h3>
-
-            </div>
-
-
-            <div class="category">
-
-                <div class="icon">
-                    🎧
-                </div>
-
-                <h3>
-                    Phụ kiện
-                </h3>
-
-            </div>
-
-
-            <div class="category">
-
-                <div class="icon">
-                    ⌚
-                </div>
-
-                <h3>
-                    Đồng hồ
-                </h3>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= SẢN PHẨM ================= -->
-
-    <section class="container" id="sanpham">
-
-        <div class="title">
-
-            <h2>
-                Sản phẩm nổi bật
-            </h2>
-
-            <p>
-                Những sản phẩm được yêu thích tại Công Store
-            </p>
-
-        </div>
-
-
-        <div class="products">
-
-
-            <!-- Sản phẩm 1 -->
-
-            <div class="product">
-
-                <div class="product-image">
-                    📱
-                </div>
-
-                <div class="product-info">
-
-                    <h3>
-                        iPhone 15
-                    </h3>
-
-                    <p class="description">
-                        Smartphone cao cấp với thiết kế hiện đại,
-                        hiệu năng mạnh mẽ.
-                    </p>
-
-                    <div class="price">
-                        18.990.000đ
-                    </div>
-
-                    <button class="buy-button"
-                        onclick="addToCart('iPhone 15')">
-
-                        🛒 Thêm vào giỏ
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Sản phẩm 2 -->
-
-            <div class="product">
-
-                <div class="product-image">
-                    💻
-                </div>
-
-                <div class="product-info">
-
-                    <h3>
-                        MacBook Air M2
-                    </h3>
-
-                    <p class="description">
-                        Laptop mỏng nhẹ, hiệu năng cao,
-                        phù hợp học tập và làm việc.
-                    </p>
-
-                    <div class="price">
-                        22.990.000đ
-                    </div>
-
-                    <button class="buy-button"
-                        onclick="addToCart('MacBook Air M2')">
-
-                        🛒 Thêm vào giỏ
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Sản phẩm 3 -->
-
-            <div class="product">
-
-                <div class="product-image">
-                    🎧
-                </div>
-
-                <div class="product-info">
-
-                    <h3>
-                        AirPods Pro
-                    </h3>
-
-                    <p class="description">
-                        Tai nghe không dây chống ồn,
-                        âm thanh chất lượng cao.
-                    </p>
-
-                    <div class="price">
-                        5.490.000đ
-                    </div>
-
-                    <button class="buy-button"
-                        onclick="addToCart('AirPods Pro')">
-
-                        🛒 Thêm vào giỏ
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Sản phẩm 4 -->
-
-            <div class="product">
-
-                <div class="product-image">
-                    ⌚
-                </div>
-
-                <div class="product-info">
-
-                    <h3>
-                        Apple Watch
-                    </h3>
-
-                    <p class="description">
-                        Đồng hồ thông minh hỗ trợ theo dõi
-                        sức khỏe và kết nối điện thoại.
-                    </p>
-
-                    <div class="price">
-                        7.990.000đ
-                    </div>
-
-                    <button class="buy-button"
-                        onclick="addToCart('Apple Watch')">
-
-                        🛒 Thêm vào giỏ
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Sản phẩm 5 -->
-
-            <div class="product">
-
-                <div class="product-image">
-                    🖱️
-                </div>
-
-                <div class="product-info">
-
-                    <h3>
-                        Chuột Logitech
-                    </h3>
-
-                    <p class="description">
-                        Chuột không dây tiện lợi,
-                        phù hợp học tập và văn phòng.
-                    </p>
-
-                    <div class="price">
-                        599.000đ
-                    </div>
-
-                    <button class="buy-button"
-                        onclick="addToCart('Chuột Logitech')">
-
-                        🛒 Thêm vào giỏ
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Sản phẩm 6 -->
-
-            <div class="product">
-
-                <div class="product-image">
-                    ⌨️
-                </div>
-
-                <div class="product-info">
-
-                    <h3>
-                        Bàn phím cơ
-                    </h3>
-
-                    <p class="description">
-                        Bàn phím cơ dành cho gaming
-                        và lập trình.
-                    </p>
-
-                    <div class="price">
-                        1.290.000đ
-                    </div>
-
-                    <button class="buy-button"
-                        onclick="addToCart('Bàn phím cơ')">
-
-                        🛒 Thêm vào giỏ
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= KHUYẾN MÃI ================= -->
-
-    <section class="container">
-
-        <div class="promotion">
-
-            <h2>
-                🎉 Ưu đãi đặc biệt
-            </h2>
-
-            <p>
-                Giảm đến 30% cho các sản phẩm trong tháng này!
-            </p>
-
-            <a href="#sanpham" class="button">
-                Xem sản phẩm
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= LIÊN HỆ ================= -->
-
-    <section class="container" id="lienhe">
-
-        <div class="title">
-
-            <h2>
-                Liên hệ với chúng tôi
-            </h2>
-
-            <p>
-                Nếu bạn có bất kỳ câu hỏi nào, hãy liên hệ với Cong Store
-            </p>
-
-        </div>
-
-
-        <div class="contact">
-
-
-            <div class="contact-box">
-
-                <h3>
-                    📞 Thông tin cửa hàng
+                    Chưa có danh mục
                 </h3>
 
                 <p>
-                    📍 Địa chỉ: Việt Nam
-                </p>
-
-                <p>
-                    📞 Điện thoại: 0392 808 991
-                </p>
-
-                <p>
-                    📧 Email: nguyenxuancong2122006@gmail.com
-                </p>
-
-                <p>
-                    🕒 Thời gian: 08:00 - 23:00
+                    Vui lòng thêm danh mục trong trang quản trị.
                 </p>
 
             </div>
 
+        {% endfor %}
 
-            <div class="contact-box">
+    </div>
 
-                <h3>
-                    ✉️ Gửi tin nhắn
-                </h3>
+</section>
 
-                <form>
 
-                    <input
-                        type="text"
-                        placeholder="Họ và tên"
-                        required
+<!-- =====================================================
+     SẢN PHẨM
+===================================================== -->
+
+<section class="container" id="sanpham">
+
+    <div class="title">
+
+        <h2>
+            Sản phẩm nổi bật
+        </h2>
+
+        <p>
+            Những sản phẩm đang được bán tại Cong Store
+        </p>
+
+    </div>
+
+
+    <div class="products">
+
+
+        {% for product in products %}
+
+        <div class="product">
+
+
+            <!-- HÌNH ẢNH -->
+
+            <div class="product-image">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
                     >
 
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        required
-                    >
+                {% else %}
 
-                    <textarea
-                        placeholder="Nội dung tin nhắn"
-                        required>
-                    </textarea>
+                    <div class="no-image">
+
+                        {% if product.category.name == "Điện thoại" %}
+                            📱
+
+                        {% elif product.category.name == "Laptop" %}
+                            💻
+
+                        {% elif product.category.name == "Phụ kiện" %}
+                            🎧
+
+                        {% elif product.category.name == "Đồng hồ" %}
+                            ⌚
+
+                        {% else %}
+                            🛍️
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- THÔNG TIN -->
+
+            <div class="product-info">
+
+                <div class="category-name">
+
+                    {% if product.category %}
+                        {{ product.category.name }}
+                    {% endif %}
+
+                </div>
+
+
+                <h3>
+                    {{ product.name }}
+                </h3>
+
+
+                <p class="description">
+
+                    {{ product.description|truncatechars:100 }}
+
+                </p>
+
+
+                <div class="price">
+
+                    {{ product.price|floatformat:0 }}đ
+
+                </div>
+
+
+                <!-- KHO -->
+
+                {% if product.quantity > 0 %}
+
+                    <div class="stock in-stock">
+
+                        ✅ Còn {{ product.quantity }} sản phẩm
+
+                    </div>
+
+                {% else %}
+
+                    <div class="stock out-stock">
+
+                        ❌ Hết hàng
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- BUTTON -->
+
+                {% if product.quantity > 0 %}
+
+                    {% if user.is_authenticated %}
+
+                        <a
+                            href="{% url 'add_to_cart' product.id %}"
+                            class="buy-button"
+                        >
+                            🛒 Thêm vào giỏ
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="buy-button"
+                        >
+                            🔐 Đăng nhập để mua
+                        </a>
+
+                    {% endif %}
+
+                {% else %}
 
                     <button
-                        type="submit"
-                        class="submit-button">
-
-                        Gửi liên hệ
-
+                        class="buy-button disabled-button"
+                        disabled
+                    >
+                        Hết hàng
                     </button>
 
-                </form>
+                {% endif %}
+
+
+                <a
+                    href="{% url 'product_detail' product.id %}"
+                    style="
+                        display:block;
+                        text-align:center;
+                        margin-top:12px;
+                        color:#2563eb;
+                        text-decoration:none;
+                    "
+                >
+                    Xem chi tiết →
+                </a>
 
             </div>
 
         </div>
 
-    </section>
+
+        {% empty %}
+
+            <div class="empty">
+
+                <h3>
+                    🛍️ Chưa có sản phẩm
+                </h3>
+
+                <p style="margin-top:10px;">
+
+                    Hãy vào trang quản trị để thêm sản phẩm.
+
+                </p>
+
+                <a
+                    href="/admin/"
+                    style="
+                        display:inline-block;
+                        margin-top:20px;
+                        color:#2563eb;
+                        font-weight:bold;
+                        text-decoration:none;
+                    "
+                >
+                    Đi đến quản trị →
+                </a>
+
+            </div>
+
+        {% endfor %}
 
 
-    <!-- ================= FOOTER ================= -->
+    </div>
 
-    <footer>
+</section>
+
+
+<!-- =====================================================
+     KHUYẾN MÃI
+===================================================== -->
+
+<section class="container">
+
+    <div class="promotion">
+
+        <h2>
+            🎉 Ưu đãi đặc biệt
+        </h2>
 
         <p>
-            © 2026 - Cong Store
+            Giảm đến 30% cho các sản phẩm trong tháng này!
         </p>
+
+        <a href="#sanpham" class="button">
+            Xem sản phẩm
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LIÊN HỆ
+===================================================== -->
+
+<section class="container" id="lienhe">
+
+    <div class="title">
+
+        <h2>
+            Liên hệ với chúng tôi
+        </h2>
 
         <p>
-            Nguyễn Xuân Công - 24CT1
+            Nếu bạn có bất kỳ câu hỏi nào,
+            hãy liên hệ với Cong Store
         </p>
 
-        <p>
-            Website bán hàng trực tuyến
-        </p>
-
-    </footer>
+    </div>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <div class="contact">
 
-    <script>
 
-        function addToCart(productName) {
+        <div class="contact-box">
 
-            alert(
-                "Đã thêm " +
-                productName +
-                " vào giỏ hàng!"
-            );
+            <h3>
+                📞 Thông tin cửa hàng
+            </h3>
 
-        }
+            <p>
+                📍 Địa chỉ: Việt Nam
+            </p>
 
-    </script>
+            <p>
+                📞 Điện thoại: 0392 808 991
+            </p>
+
+            <p>
+                📧 Email: nguyenxuancong2122006@gmail.com
+            </p>
+
+            <p>
+                🕒 Thời gian: 08:00 - 23:00
+            </p>
+
+        </div>
+
+
+        <div class="contact-box">
+
+            <h3>
+                ✉️ Gửi tin nhắn
+            </h3>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <input
+                    type="text"
+                    placeholder="Họ và tên"
+                    required
+                >
+
+                <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                >
+
+                <textarea
+                    placeholder="Nội dung tin nhắn"
+                    required
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    Gửi liên hệ
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 - Cong Store
+    </p>
+
+    <p>
+        Nguyễn Xuân Công - 24CT1
+    </p>
+
+    <p>
+        Website bán hàng trực tuyến
+    </p>
+
+</footer>
 
 </body>
 </html>
