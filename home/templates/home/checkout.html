@@ -1,402 +1,326 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Thanh toán - Cong Store</title>
 
     <style>
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #333;
+            background: #f5f7fb;
+            color: #1f2937;
         }
 
-        /* =========================
-           NAVBAR
-        ========================= */
-
         .navbar {
-            background: #1e3a8a;
-            padding: 18px 8%;
-
+            background: white;
+            padding: 18px 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 3px 15px rgba(0,0,0,.06);
         }
 
         .logo {
-            color: white;
             font-size: 25px;
             font-weight: bold;
+            color: #172554;
         }
 
         .menu {
             display: flex;
             gap: 20px;
-            align-items: center;
         }
 
         .menu a {
-            color: white;
+            color: #475569;
             text-decoration: none;
+            font-weight: 600;
         }
 
         .menu a:hover {
-            color: #93c5fd;
+            color: #2563eb;
         }
-
-
-        /* =========================
-           CONTAINER
-        ========================= */
 
         .container {
             width: 90%;
             max-width: 1100px;
-            margin: 50px auto;
+            margin: 40px auto 70px;
         }
 
-        .title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .title h1 {
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-
-
-        /* =========================
-           CHECKOUT LAYOUT
-        ========================= */
-
-        .checkout-layout {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 25px;
-        }
-
-
-        /* =========================
-           BOX
-        ========================= */
-
-        .checkout-box {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-
+        .page-title {
             margin-bottom: 25px;
         }
 
-        .checkout-box h2 {
-            color: #1e3a8a;
+        .page-title h1 {
+            margin: 0 0 8px;
+            color: #172554;
+        }
+
+        .page-title p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
             margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 5px 20px rgba(15,23,42,.06);
+        }
+
+        .box h2 {
+            margin-top: 0;
+            color: #172554;
             font-size: 21px;
         }
 
-
-        /* =========================
-           FORM
-        ========================= */
-
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
         .form-group label {
             display: block;
-            font-weight: bold;
             margin-bottom: 7px;
+            font-weight: 600;
+            color: #374151;
         }
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
-
-            padding: 12px;
-
+            padding: 12px 14px;
             border: 1px solid #d1d5db;
-            border-radius: 8px;
-
-            font-size: 15px;
-
+            border-radius: 9px;
+            font-size: 14px;
             outline: none;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             border-color: #2563eb;
         }
 
         .form-group textarea {
-            resize: vertical;
             min-height: 90px;
+            resize: vertical;
         }
 
+        /* ==============================
+           QR
+        ============================== */
 
-        /* =========================
-           PAYMENT
-        ========================= */
-
-        .payment-option {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-
-            padding: 14px;
-
-            margin-bottom: 10px;
-
-            cursor: pointer;
-        }
-
-        .payment-option:hover {
-            border-color: #2563eb;
-            background: #f8faff;
-        }
-
-        .payment-option label {
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .payment-option small {
-            display: block;
-            margin-top: 5px;
-            color: #666;
-            margin-left: 23px;
-        }
-
-
-        /* =========================
-           PRODUCT
-        ========================= */
-
-        .order-item {
-            display: flex;
-            align-items: center;
-
-            gap: 15px;
-
-            padding: 15px 0;
-
-            border-bottom: 1px solid #eee;
-        }
-
-        .order-item:last-child {
-            border-bottom: none;
-        }
-
-        .product-image {
-            width: 70px;
-            height: 70px;
-
-            background: #eef2ff;
-
-            border-radius: 10px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            font-size: 30px;
-
+        .qr-box {
+            border: 1px solid #fed7aa;
+            border-radius: 14px;
             overflow: hidden;
-
-            flex-shrink: 0;
         }
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
+        .qr-head {
+            padding: 18px 20px;
+            background: #fff7ed;
+            border-bottom: 1px solid #fed7aa;
         }
 
-        .product-info {
-            flex: 1;
+        .qr-head h2 {
+            margin: 0 0 5px;
+            color: #b45309;
         }
 
-        .product-name {
-            font-weight: bold;
-            color: #1e3a8a;
-
-            margin-bottom: 5px;
-        }
-
-        .product-quantity {
-            color: #666;
+        .qr-head p {
+            margin: 0;
+            color: #64748b;
             font-size: 14px;
         }
 
-        .product-price {
-            color: #e11d48;
-            font-weight: bold;
-
-            text-align: right;
+        .qr-body {
+            padding: 20px;
         }
 
-
-        /* =========================
-           PROMOTION
-        ========================= */
-
-        .promotion {
-            display: flex;
-            gap: 10px;
+        .qr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: center;
         }
 
-        .promotion input {
-            flex: 1;
+        .qr-left {
+            text-align: center;
         }
 
-        .promotion-note {
-            color: #666;
+        .qr-image {
+            width: min(100%, 300px);
+            display: block;
+            margin: 15px auto;
+        }
+
+        .qr-caption {
+            color: #64748b;
             font-size: 13px;
-            margin-top: 8px;
         }
 
+        .qr-info {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
 
-        /* =========================
-           SUMMARY
-        ========================= */
+        .qr-row {
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .qr-label {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .qr-value {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+        .amount {
+            color: #059669;
+            font-size: 20px;
+        }
+
+        .content {
+            color: #c2410c;
+        }
+
+        .qr-instructions {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .qr-warning {
+            margin-top: 14px;
+            padding: 13px;
+            border-radius: 10px;
+            background: #fff7ed;
+            color: #9a3412;
+            font-size: 13px;
+        }
+
+        /* ==============================
+           ORDER SUMMARY
+        ============================== */
+
+        .summary {
+            position: sticky;
+            top: 100px;
+        }
 
         .summary-row {
             display: flex;
             justify-content: space-between;
-
             padding: 10px 0;
-
-            border-bottom: 1px solid #eee;
+            color: #64748b;
         }
 
-        .summary-row:last-child {
-            border-bottom: none;
+        .summary-row strong {
+            color: #172033;
         }
 
-        .summary-label {
-            color: #555;
-        }
-
-        .summary-value {
-            font-weight: bold;
-        }
-
-        .discount {
-            color: #16a34a;
-        }
-
-        .final-total {
+        .summary-total {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-
-            margin-top: 20px;
-            padding-top: 20px;
-
-            border-top: 2px solid #eee;
-
-            font-size: 22px;
-        }
-
-        .final-price {
-            color: #e11d48;
+            border-top: 2px solid #e5e7eb;
+            margin-top: 10px;
+            padding-top: 18px;
+            font-size: 20px;
             font-weight: bold;
         }
 
+        .total-price {
+            color: #dc2626;
+        }
 
-        /* =========================
-           BUTTON
-        ========================= */
-
-        .order-button {
-            display: block;
-
+        .submit-button {
             width: 100%;
-
             margin-top: 20px;
-
             padding: 15px;
-
-            background: #2563eb;
-
-            color: white;
-
             border: none;
-
-            border-radius: 8px;
-
+            border-radius: 10px;
+            background: #16a34a;
+            color: white;
             font-size: 16px;
-
             font-weight: bold;
-
             cursor: pointer;
         }
 
-        .order-button:hover {
-            background: #1e40af;
+        .submit-button:hover {
+            background: #15803d;
         }
 
-        .back-cart {
+        .back-button {
             display: block;
-
+            width: 100%;
+            margin-top: 12px;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
             text-align: center;
-
-            margin-top: 15px;
-
-            color: #2563eb;
-
+            color: #374151;
             text-decoration: none;
-
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        .back-cart:hover {
-            text-decoration: underline;
+        .back-button:hover {
+            background: #f8fafc;
         }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
 
         footer {
             background: #111827;
-
             color: white;
-
             text-align: center;
-
             padding: 25px;
-
-            margin-top: 60px;
         }
-
-        footer p {
-            margin: 5px;
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
 
         @media (max-width: 800px) {
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+
+            .qr-grid {
+                grid-template-columns: 1fr;
+            }
 
             .navbar {
                 flex-direction: column;
@@ -407,24 +331,18 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
-            .checkout-layout {
-                grid-template-columns: 1fr;
-            }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
 
 
-<!-- =====================================================
+<!-- ==============================
      NAVBAR
-===================================================== -->
+============================== -->
 
 <nav class="navbar">
 
@@ -435,23 +353,19 @@
     <div class="menu">
 
         <a href="{% url 'home' %}">
-            🏠 Trang chủ
+            Trang chủ
         </a>
 
         <a href="{% url 'cart' %}">
             🛒 Giỏ hàng
         </a>
 
-        <a href="{% url 'profile' %}">
-            👤 Tài khoản
-        </a>
-
         <a href="{% url 'orders' %}">
             📦 Đơn hàng
         </a>
 
-        <a href="{% url 'logout' %}">
-            Đăng xuất
+        <a href="{% url 'profile' %}">
+            👤 Tài khoản
         </a>
 
     </div>
@@ -459,22 +373,24 @@
 </nav>
 
 
-<!-- =====================================================
-     CONTAINER
-===================================================== -->
-
 <div class="container">
 
 
-    <div class="title">
+    <div class="page-title">
 
-        <h1>💳 Thanh toán</h1>
+        <h1>
+            💳 Thanh toán
+        </h1>
 
-        <p>Kiểm tra thông tin trước khi đặt hàng</p>
+        <p>
+            Kiểm tra thông tin đơn hàng và thực hiện thanh toán.
+        </p>
 
     </div>
 
 
+    <!-- QUAN TRỌNG:
+         TOÀN BỘ NỘI DUNG NẰM TRONG FORM -->
     <form method="POST">
 
         {% csrf_token %}
@@ -483,37 +399,32 @@
         <div class="checkout-layout">
 
 
-            <!-- =================================================
-                 CỘT TRÁI
-            ================================================== -->
+            <!-- ==============================
+                 BÊN TRÁI
+            ============================== -->
 
             <div>
 
 
-                <!-- =========================
-                     THÔNG TIN NHẬN HÀNG
-                ========================== -->
+                <!-- THÔNG TIN NHẬN HÀNG -->
 
-                <div class="checkout-box">
+                <div class="box">
 
                     <h2>
-                        📍 Thông tin nhận hàng
+                        👤 Thông tin nhận hàng
                     </h2>
 
 
                     <div class="form-group">
 
-                        <label for="full_name">
-                            Họ và tên người nhận
+                        <label>
+                            Họ và tên người nhận *
                         </label>
 
                         <input
                             type="text"
-                            id="full_name"
                             name="full_name"
-
-                            value="{% if customer %}{{ customer.user.first_name }} {{ customer.user.last_name }}{% endif %}"
-
+                            value="{% if customer %}{{ customer.user.get_full_name }}{% endif %}"
                             placeholder="Nhập họ và tên"
                             required
                         >
@@ -523,17 +434,14 @@
 
                     <div class="form-group">
 
-                        <label for="phone">
-                            Số điện thoại
+                        <label>
+                            Số điện thoại *
                         </label>
 
                         <input
-                            type="tel"
-                            id="phone"
+                            type="text"
                             name="phone"
-
                             value="{% if customer %}{{ customer.phone }}{% endif %}"
-
                             placeholder="Nhập số điện thoại"
                             required
                         >
@@ -543,12 +451,11 @@
 
                     <div class="form-group">
 
-                        <label for="address">
-                            Địa chỉ nhận hàng
+                        <label>
+                            Địa chỉ nhận hàng *
                         </label>
 
                         <textarea
-                            id="address"
                             name="address"
                             placeholder="Nhập địa chỉ nhận hàng"
                             required
@@ -559,14 +466,13 @@
 
                     <div class="form-group">
 
-                        <label for="note">
-                            Ghi chú đơn hàng
+                        <label>
+                            Ghi chú
                         </label>
 
                         <textarea
-                            id="note"
                             name="note"
-                            placeholder="Ví dụ: Giao hàng giờ hành chính..."
+                            placeholder="Ghi chú cho đơn hàng (nếu có)"
                         ></textarea>
 
                     </div>
@@ -574,56 +480,226 @@
                 </div>
 
 
-                <!-- =========================
-                     PHƯƠNG THỨC THANH TOÁN
-                ========================== -->
+                <!-- MÃ GIẢM GIÁ -->
 
-                <div class="checkout-box">
+                <div class="box">
 
                     <h2>
-                        💰 Phương thức thanh toán
+                        🎁 Mã giảm giá
                     </h2>
 
-
-                    <div class="payment-option">
+                    <div class="form-group">
 
                         <label>
-
-                            <input
-                                type="radio"
-                                name="payment_method"
-                                value="COD"
-                                checked
-                            >
-
-                            💵 Thanh toán khi nhận hàng (COD)
-
+                            Mã khuyến mãi
                         </label>
 
-                        <small>
-                            Thanh toán trực tiếp cho nhân viên giao hàng.
-                        </small>
+                        <input
+                            type="text"
+                            name="promotion_code"
+                            placeholder="Nhập mã giảm giá nếu có"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==============================
+                     QR PAYMENT
+                ============================== -->
+
+                <div class="box qr-box">
+
+                    <div class="qr-head">
+
+                        <h2>
+                            Thông tin thanh toán
+                        </h2>
+
+                        <p>
+                            Thanh toán:
+                            <strong>QR</strong>
+                            · Chuyển khoản đúng số tiền và nội dung
+                        </p>
 
                     </div>
 
 
-                    <div class="payment-option">
+                    <div class="qr-body">
 
-                        <label>
+                        <p style="
+                            color:#64748b;
+                            font-size:14px;
+                        ">
+                            Vui lòng quét mã QR bằng ứng dụng ngân hàng
+                            và kiểm tra thông tin người nhận trước khi xác nhận.
+                        </p>
 
-                            <input
-                                type="radio"
-                                name="payment_method"
-                                value="BANK"
-                            >
 
-                            🏦 Chuyển khoản ngân hàng
+                        <!-- PAYMENT METHOD -->
 
-                        </label>
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="qr"
+                            checked
+                            hidden
+                        >
 
-                        <small>
-                            Chuyển khoản trước khi nhận hàng.
-                        </small>
+
+                        <div class="qr-grid">
+
+
+                            <!-- QR -->
+
+                            <div class="qr-left">
+
+                                <div style="
+                                    display:inline-block;
+                                    padding:7px 12px;
+                                    border-radius:999px;
+                                    background:#eff6ff;
+                                    color:#2563eb;
+                                    font-weight:bold;
+                                    font-size:13px;
+                                ">
+                                    ✓ Thanh toán bằng mã QR
+                                </div>
+
+
+                                <img
+                                    src="{% static 'home/images/qr-agribank.png' %}"
+                                    alt="Mã QR thanh toán Agribank"
+                                    class="qr-image"
+                                >
+
+
+                                <div class="qr-caption">
+                                    Quét QR bằng app ngân hàng
+                                </div>
+
+                            </div>
+
+
+                            <!-- THÔNG TIN NGÂN HÀNG -->
+
+                            <div class="qr-info">
+
+
+                                <div class="qr-row">
+
+                                    <div class="qr-label">
+                                        Ngân hàng nhận
+                                    </div>
+
+                                    <div class="qr-value">
+                                        AGRIBANK
+                                    </div>
+
+                                </div>
+
+
+                                <div class="qr-row">
+
+                                    <div class="qr-label">
+                                        Số tài khoản
+                                    </div>
+
+                                    <div class="qr-value">
+                                        4005205409800
+                                    </div>
+
+                                </div>
+
+
+                                <div class="qr-row">
+
+                                    <div class="qr-label">
+                                        Chủ tài khoản
+                                    </div>
+
+                                    <div class="qr-value">
+                                        NGUYEN XUAN CONG
+                                    </div>
+
+                                </div>
+
+
+                                <div class="qr-row">
+
+                                    <div class="qr-label">
+                                        Số tiền cần thanh toán
+                                    </div>
+
+                                    <div class="qr-value amount">
+                                        {{ total|floatformat:0 }} đ
+                                    </div>
+
+                                </div>
+
+
+                                <div class="qr-row">
+
+                                    <div class="qr-label">
+                                        Nội dung chuyển khoản
+                                    </div>
+
+                                    <div class="qr-value content">
+                                        CONGSTORE
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HƯỚNG DẪN -->
+
+                        <div class="qr-instructions">
+
+                            <strong>
+                                💡 Cách thanh toán
+                            </strong>
+
+                            <ol>
+
+                                <li>
+                                    Mở ứng dụng ngân hàng trên điện thoại.
+                                </li>
+
+                                <li>
+                                    Chọn chức năng
+                                    <strong>Quét mã QR</strong>.
+                                </li>
+
+                                <li>
+                                    Quét mã QR bên trên.
+                                </li>
+
+                                <li>
+                                    Kiểm tra đúng người nhận và số tiền
+                                    rồi xác nhận.
+                                </li>
+
+                            </ol>
+
+                        </div>
+
+
+                        <div class="qr-warning">
+
+                            🔒
+                            <strong>Lưu ý:</strong>
+
+                            Vui lòng chuyển đúng số tiền và kiểm tra
+                            đúng thông tin người nhận trước khi xác nhận giao dịch.
+
+                        </div>
+
 
                     </div>
 
@@ -633,205 +709,136 @@
             </div>
 
 
-            <!-- =================================================
-                 CỘT PHẢI
-            ================================================== -->
+            <!-- ==============================
+                 BÊN PHẢI
+            ============================== -->
 
-            <div>
+            <div class="box summary">
 
-
-                <!-- =========================
-                     SẢN PHẨM
-                ========================== -->
-
-                <div class="checkout-box">
-
-                    <h2>
-                        🛍️ Đơn hàng của bạn
-                    </h2>
+                <h2>
+                    📋 Tóm tắt đơn hàng
+                </h2>
 
 
-                    {% for item in items %}
+                <div class="summary-row">
 
-                        <div class="order-item">
+                    <span>
+                        Số sản phẩm
+                    </span>
 
-
-                            <div class="product-image">
-
-                                {% if item.product.image %}
-
-                                    <img
-                                        src="{{ item.product.image.url }}"
-                                        alt="{{ item.product.name }}"
-                                    >
-
-                                {% else %}
-
-                                    🛍️
-
-                                {% endif %}
-
-                            </div>
-
-
-                            <div class="product-info">
-
-                                <div class="product-name">
-                                    {{ item.product.name }}
-                                </div>
-
-                                <div class="product-quantity">
-                                    Số lượng: {{ item.quantity }}
-                                </div>
-
-                            </div>
-
-
-                            <div class="product-price">
-
-                                {{ item.subtotal|floatformat:0 }}đ
-
-                            </div>
-
-
-                        </div>
-
-                    {% endfor %}
+                    <strong>
+                        {{ items|length }}
+                    </strong>
 
                 </div>
 
 
-                <!-- =========================
-                     MÃ GIẢM GIÁ
-                ========================== -->
+                <div class="summary-row">
 
-                <div class="checkout-box">
+                    <span>
+                        Tạm tính
+                    </span>
 
-                    <h2>
-                        🎟️ Mã giảm giá
-                    </h2>
-
-
-                    <div class="promotion">
-
-                        <input
-                            type="text"
-                            name="promotion_code"
-                            placeholder="Nhập mã giảm giá"
-                        >
-
-                    </div>
-
-
-                    <div class="promotion-note">
-
-                        Nếu bạn có mã giảm giá, hãy nhập vào đây.
-
-                    </div>
+                    <strong>
+                        {{ subtotal|floatformat:0 }}đ
+                    </strong>
 
                 </div>
 
 
-                <!-- =========================
-                     TỔNG TIỀN
-                ========================== -->
+                {% if discount > 0 %}
 
-                <div class="checkout-box">
+                <div class="summary-row">
 
-                    <h2>
-                        💰 Tổng thanh toán
-                    </h2>
+                    <span>
+                        Giảm giá
+                    </span>
 
-
-                    <div class="summary-row">
-
-                        <span class="summary-label">
-                            Tạm tính
-                        </span>
-
-                        <span class="summary-value">
-
-                            {{ subtotal|floatformat:0 }}đ
-
-                        </span>
-
-                    </div>
-
-
-                    <div class="summary-row">
-
-                        <span class="summary-label">
-                            Giảm giá
-                        </span>
-
-                        <span class="summary-value discount">
-
-                            -{{ discount|floatformat:0 }}đ
-
-                        </span>
-
-                    </div>
-
-
-                    <div class="final-total">
-
-                        <span>
-                            Tổng cộng
-                        </span>
-
-                        <span class="final-price">
-
-                            {{ total|floatformat:0 }}đ
-
-                        </span>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="order-button"
-                    >
-
-                        🛍️ ĐẶT HÀNG
-
-                    </button>
-
-
-                    <a
-                        href="{% url 'cart' %}"
-                        class="back-cart"
-                    >
-
-                        ← Quay lại giỏ hàng
-
-                    </a>
+                    <strong style="color:#16a34a;">
+                        -{{ discount|floatformat:0 }}đ
+                    </strong>
 
                 </div>
 
+                {% endif %}
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Phí vận chuyển
+                    </span>
+
+                    <strong>
+                        Miễn phí
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Tổng thanh toán
+                    </span>
+
+                    <span class="total-price">
+                        {{ total|floatformat:0 }}đ
+                    </span>
+
+                </div>
+
+
+                <!-- NÚT GỬI FORM -->
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    ✓ Tôi đã thanh toán
+                </button>
+
+
+                <a
+                    href="{% url 'cart' %}"
+                    class="back-button"
+                >
+                    ← Quay lại giỏ hàng
+                </a>
+
+
+                <div style="
+                    text-align:center;
+                    margin-top:18px;
+                    color:#64748b;
+                    font-size:12px;
+                ">
+                    🔒 Thanh toán an toàn và bảo mật
+                </div>
 
             </div>
 
 
         </div>
 
-
     </form>
 
 </div>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
 <footer>
 
-    <p>© 2026 - Cong Store</p>
+    <p>
+        🛒 Cong Store
+    </p>
 
-    <p>Nguyễn Xuân Công - 24CT1</p>
+    <p>
+        Cửa hàng thời trang trực tuyến
+    </p>
 
-    <p>Website bán hàng trực tuyến</p>
+    <p>
+        © 2026 Cong Store · Nguyễn Xuân Công - 24CT1
+    </p>
 
 </footer>
 

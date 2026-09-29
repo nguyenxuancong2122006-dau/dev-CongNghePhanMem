@@ -119,9 +119,19 @@ urlpatterns = [
         name='order_detail'
     ),
 
+
+
+    # Xác nhận thanh toán QR
     path(
-        'don-hang/<int:order_id>/huy/',
-        views.cancel_order,
-        name='cancel_order'
+        'don-hang/<int:order_id>/xac-nhan-thanh-toan/',
+        views.confirm_payment,
+        name='confirm_payment'
     ),
+    
+    path( 
+        'don-hang/<int:order_id>/huy/', 
+        views.cancel_order, 
+        name='cancel_order' 
+    ),
+
 ]

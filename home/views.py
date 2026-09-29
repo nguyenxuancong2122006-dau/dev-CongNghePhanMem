@@ -524,9 +524,10 @@ def checkout(request):
             ''
         ).strip()
 
+        # Thanh toán QR
         payment_method = request.POST.get(
             'payment_method',
-            Order.PAYMENT_COD
+            'qr'
         )
 
         note = request.POST.get(
@@ -570,13 +571,10 @@ def checkout(request):
 
             return redirect('checkout')
 
-        # Kiểm tra phương thức thanh toán
-        if payment_method not in [
-            Order.PAYMENT_COD,
-            Order.PAYMENT_BANK
-        ]:
+        # Chỉ cho phép thanh toán QR
+        if payment_method != 'qr':
 
-            payment_method = Order.PAYMENT_COD
+            payment_method = 'qr'
 
         # =================================================
         # XỬ LÝ MÃ GIẢM GIÁ
@@ -700,6 +698,8 @@ def checkout(request):
 
                     payment_method=payment_method,
 
+                    # Chờ người dùng bấm
+                    # "Tôi đã thanh toán"
                     status=Order.STATUS_PENDING,
 
                     note=note
@@ -773,9 +773,11 @@ def checkout(request):
 
         messages.success(
             request,
-            f'Đặt hàng thành công! Mã đơn hàng: #{order.id}'
+            f'Tạo đơn hàng thành công! Mã đơn hàng: #{order.id}. '
+            f'Vui lòng xác nhận thanh toán QR.'
         )
 
+        # Chuyển thẳng đến chi tiết đơn hàng
         return redirect(
             'order_detail',
             order_id=order.id
@@ -806,7 +808,6 @@ def checkout(request):
         'home/checkout.html',
         context
     )
-
 
 # =========================================================
 # THÔNG TIN CÁ NHÂN
@@ -926,6 +927,54 @@ def order_detail(request, order_id):
         request,
         'home/order_detail.html',
         context
+    )
+
+# =========================================================
+# XÁC NHẬN THANH TOÁN QR - DEMO
+# =========================================================
+
+@login_required
+def confirm_payment(request, order_id):
+
+    order = get_object_or_404(
+        Order,
+        id=order_id,
+        customer=request.user
+    )
+
+    # Chỉ xác nhận đơn đang chờ thanh toán
+    if order.status == Order.STATUS_PENDING:
+
+        order.status = Order.STATUS_CONFIRMED
+        order.save(
+            update_fields=[
+                'status',
+                'updated_at'
+            ]
+        )
+
+        messages.success(
+            request,
+            f'Đã xác nhận thanh toán cho đơn hàng #{order.id}.'
+        )
+
+    elif order.status == Order.STATUS_CONFIRMED:
+
+        messages.info(
+            request,
+            'Đơn hàng này đã được xác nhận thanh toán.'
+        )
+
+    else:
+
+        messages.warning(
+            request,
+            'Đơn hàng này không thể xác nhận thanh toán.'
+        )
+
+    return redirect(
+        'order_detail',
+        order_id=order.id
     )
 
 

@@ -1,1 +1,716 @@
-/don-hang/
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đơn hàng - Cong Store</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: white;
+            min-height: 70px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 7%;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .menu a:hover {
+            color: #2563eb;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .page-title {
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+        }
+
+        /* =========================
+           ORDER CARD
+        ========================= */
+
+        .order-card {
+            background: white;
+
+            border-radius: 16px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+
+            overflow: hidden;
+
+            transition: 0.2s;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
+        }
+
+        /* =========================
+           ORDER HEADER
+        ========================= */
+
+        .order-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 20px 25px;
+
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .order-code {
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #111827;
+        }
+
+        .order-date {
+            margin-top: 6px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        .confirmed {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .shipping {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        .delivered {
+            background: #ecfeff;
+            color: #0891b2;
+        }
+
+        .completed {
+            background: #ecfdf5;
+            color: #16a34a;
+        }
+
+        .cancelled {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        /* =========================
+           ORDER BODY
+        ========================= */
+
+        .order-body {
+            padding: 20px 25px;
+        }
+
+        .order-info {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+
+            border-radius: 10px;
+
+            padding: 15px;
+        }
+
+        .info-label {
+            color: #6b7280;
+
+            font-size: 13px;
+
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-weight: bold;
+
+            color: #1f2937;
+        }
+
+        /* =========================
+           TOTAL
+        ========================= */
+
+        .order-bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-top: 1px solid #edf0f4;
+
+            padding-top: 18px;
+        }
+
+        .total-label {
+            color: #6b7280;
+        }
+
+        .total-price {
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #dc2626;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .detail-button {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .detail-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 70px 30px;
+
+            text-align: center;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-icon {
+            font-size: 65px;
+
+            margin-bottom: 20px;
+        }
+
+        .empty h2 {
+            color: #111827;
+
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #6b7280;
+
+            margin-bottom: 25px;
+        }
+
+        .shop-button {
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+
+                gap: 15px;
+
+                padding: 20px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+            .order-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+
+            .order-bottom {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 Cong Store
+    </div>
+
+
+    <div class="menu">
+
+        <a href="{% url 'home' %}">
+            🏠 Trang chủ
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒 Giỏ hàng
+        </a>
+
+        <a href="{% url 'profile' %}">
+            👤 Tài khoản
+        </a>
+
+        <a href="{% url 'orders' %}">
+            📦 Đơn hàng
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Đăng xuất
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="container">
+
+
+    <div class="page-title">
+
+        <h1>
+            📦 Đơn hàng của tôi
+        </h1>
+
+        <p>
+            Theo dõi các đơn hàng bạn đã đặt tại Cong Store
+        </p>
+
+    </div>
+
+
+
+    {% if orders %}
+
+
+        {% for order in orders %}
+
+
+            <div class="order-card">
+
+
+                <!-- HEADER -->
+
+                <div class="order-header">
+
+
+                    <div>
+
+                        <div class="order-code">
+                            Đơn hàng #{{ order.id }}
+                        </div>
+
+                        <div class="order-date">
+                            📅 {{ order.created_at|date:"d/m/Y H:i" }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- TRẠNG THÁI -->
+
+                    {% if order.status == "pending" %}
+
+                        <span class="status pending">
+                            ⏳ Chờ xác nhận
+                        </span>
+
+                    {% elif order.status == "confirmed" %}
+
+                        <span class="status confirmed">
+                            ✓ Đã xác nhận
+                        </span>
+
+                    {% elif order.status == "shipping" %}
+
+                        <span class="status shipping">
+                            🚚 Đang giao
+                        </span>
+
+                    {% elif order.status == "delivered" %}
+
+                        <span class="status delivered">
+                            📦 Đã giao
+                        </span>
+
+                    {% elif order.status == "completed" %}
+
+                        <span class="status completed">
+                            ✓ Hoàn thành
+                        </span>
+
+                    {% elif order.status == "cancelled" %}
+
+                        <span class="status cancelled">
+                            ✕ Đã hủy
+                        </span>
+
+                    {% else %}
+
+                        <span class="status">
+                            {{ order.status }}
+                        </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- BODY -->
+
+                <div class="order-body">
+
+
+                    <div class="order-info">
+
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Người nhận
+                            </div>
+
+                            <div class="info-value">
+                                {{ order.full_name }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Số điện thoại
+                            </div>
+
+                            <div class="info-value">
+                                {{ order.phone }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Thanh toán
+                            </div>
+
+                            <div class="info-value">
+
+                                {% if order.payment_method == "cod" %}
+                                    💵 COD
+                                {% elif order.payment_method == "bank" %}
+                                    🏦 Chuyển khoản
+                                {% else %}
+                                    {{ order.payment_method }}
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- TOTAL -->
+
+                    <div class="order-bottom">
+
+
+                        <div>
+
+                            <div class="total-label">
+                                Tổng thanh toán
+                            </div>
+
+                            <div class="total-price">
+                                {{ order.total|floatformat:0 }}đ
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <a
+                                href="{% url 'order_detail' order.id %}"
+                                class="detail-button"
+                            >
+                                Xem chi tiết →
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- EMPTY -->
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h2>
+                Chưa có đơn hàng
+            </h2>
+
+            <p>
+                Bạn chưa đặt sản phẩm nào tại Cong Store.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="shop-button"
+            >
+                🛍️ Mua sắm ngay
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 - Cong Store
+    </p>
+
+    <p>
+        Nguyễn Xuân Công - 24CT1
+    </p>
+
+    <p>
+        Website bán hàng trực tuyến
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

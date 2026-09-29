@@ -1,1 +1,1335 @@
-/san-pham/1/
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} - Cong Store</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f6f8fc;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+
+            height: 76px;
+            padding: 0 6%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(255, 255, 255, 0.97);
+
+            border-bottom: 1px solid #e8ebf2;
+
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #172554;
+
+            font-size: 25px;
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            color: white;
+
+            font-size: 22px;
+
+            box-shadow:
+                0 6px 16px rgba(37, 99, 235, 0.25);
+        }
+
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+
+        .menu a {
+            padding: 10px 13px;
+
+            color: #475569;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            border-radius: 10px;
+
+            transition: 0.25s ease;
+        }
+
+
+        .menu a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+
+        .cart {
+            background: #2563eb !important;
+            color: white !important;
+
+            padding: 10px 17px !important;
+
+            box-shadow:
+                0 6px 15px rgba(37, 99, 235, 0.2);
+        }
+
+
+        .cart:hover {
+            background: #1d4ed8 !important;
+            color: white !important;
+        }
+
+
+        .account {
+            color: #475569 !important;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 88%;
+            max-width: 1200px;
+
+            margin: 45px auto 80px;
+        }
+
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            margin-bottom: 25px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        .breadcrumb a {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+
+        .breadcrumb span {
+            margin: 0 7px;
+            color: #94a3b8;
+        }
+
+
+        /* =========================
+           PRODUCT DETAIL
+        ========================= */
+
+        .product-detail {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 50px;
+
+            padding: 35px;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 12px 40px rgba(15, 23, 42, 0.07);
+        }
+
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        .product-image {
+            position: relative;
+
+            min-height: 500px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background: #f8fafc;
+
+            border-radius: 20px;
+        }
+
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            max-height: 500px;
+
+            object-fit: contain;
+
+            padding: 25px;
+
+            transition: 0.4s ease;
+        }
+
+
+        .product-image:hover img {
+            transform: scale(1.04);
+        }
+
+
+        .no-image {
+            font-size: 120px;
+        }
+
+
+        .stock-badge {
+            position: absolute;
+
+            top: 20px;
+            left: 20px;
+
+            padding: 8px 14px;
+
+            border-radius: 10px;
+
+            background: #16a34a;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .stock-badge.out {
+            background: #dc2626;
+        }
+
+
+        /* =========================
+           PRODUCT INFO
+        ========================= */
+
+        .product-info {
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .category {
+            display: inline-block;
+
+            width: fit-content;
+
+            margin-bottom: 14px;
+
+            padding: 6px 11px;
+
+            border-radius: 8px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .product-info h1 {
+            margin-bottom: 15px;
+
+            color: #172554;
+
+            font-size: 38px;
+
+            line-height: 1.2;
+        }
+
+
+        .rating {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        .stars {
+            color: #f59e0b;
+
+            font-size: 18px;
+        }
+
+
+        .price {
+            margin-bottom: 20px;
+
+            color: #e11d48;
+
+            font-size: 34px;
+
+            font-weight: 800;
+        }
+
+
+        .description-title {
+            margin-bottom: 8px;
+
+            color: #172554;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .description {
+            margin-bottom: 25px;
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           PRODUCT META
+        ========================= */
+
+        .product-meta {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .meta-item {
+            padding: 14px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+        }
+
+
+        .meta-label {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        .meta-value {
+            color: #172033;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .available {
+            color: #16a34a;
+        }
+
+
+        .unavailable {
+            color: #dc2626;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .actions {
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .buy-button {
+            flex: 1;
+
+            min-width: 220px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 15px 20px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+
+        .buy-button:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.22);
+        }
+
+
+        .disabled-button {
+            background: #cbd5e1;
+
+            color: #64748b;
+
+            cursor: not-allowed;
+        }
+
+
+        .disabled-button:hover {
+            background: #cbd5e1;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        .back-button {
+            min-width: 170px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px 20px;
+
+            background: white;
+
+            color: #2563eb;
+
+            border: 1px solid #bfdbfe;
+
+            border-radius: 12px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+
+        .back-button:hover {
+            background: #eff6ff;
+        }
+
+
+        /* =========================
+           SERVICE
+        ========================= */
+
+        .services {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+
+        .service {
+            padding: 22px 15px;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+
+        .service-icon {
+            margin-bottom: 8px;
+
+            font-size: 28px;
+        }
+
+
+        .service strong {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #172554;
+
+            font-size: 14px;
+        }
+
+
+        .service span {
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           INFORMATION
+        ========================= */
+
+        .information {
+            margin-top: 35px;
+
+            padding: 30px;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 30px rgba(15, 23, 42, 0.05);
+        }
+
+
+        .information h2 {
+            margin-bottom: 20px;
+
+            color: #172554;
+
+            font-size: 24px;
+        }
+
+
+        .information p {
+            color: #64748b;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 80px;
+
+            padding: 45px 7% 25px;
+
+            background: #0f172a;
+
+            color: #94a3b8;
+        }
+
+
+        .footer-content {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 1.5fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 35px;
+        }
+
+
+        .footer-brand h2 {
+            margin-bottom: 12px;
+
+            color: white;
+        }
+
+
+        .footer-brand p {
+            max-width: 400px;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer-column h4 {
+            margin-bottom: 14px;
+
+            color: white;
+        }
+
+
+        .footer-column p {
+            margin-bottom: 8px;
+
+            font-size: 14px;
+        }
+
+
+        .footer-bottom {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding-top: 22px;
+
+            border-top: 1px solid #1e293b;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .navbar {
+                padding: 0 3%;
+            }
+
+            .menu a {
+                padding: 9px 8px;
+
+                font-size: 14px;
+            }
+
+
+            .product-detail {
+                grid-template-columns: 1fr;
+
+                gap: 30px;
+            }
+
+
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 14px 5%;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+
+            .menu {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .container {
+                width: 92%;
+
+                margin-top: 30px;
+            }
+
+
+            .product-detail {
+                padding: 20px;
+            }
+
+
+            .product-image {
+                min-height: 350px;
+            }
+
+
+            .product-info h1 {
+                font-size: 30px;
+            }
+
+
+            .price {
+                font-size: 28px;
+            }
+
+
+            .product-meta {
+                grid-template-columns: 1fr;
+            }
+
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+
+        <span class="logo-icon">
+            🛒
+        </span>
+
+        <span>Cong Store</span>
+
+    </a>
+
+
+    <div class="menu">
+
+        <a href="{% url 'home' %}">
+            Trang chủ
+        </a>
+
+        <a href="{% url 'home' %}#danhmuc">
+            Danh mục
+        </a>
+
+        <a href="{% url 'home' %}#sanpham">
+            Sản phẩm
+        </a>
+
+        <a href="{% url 'home' %}#lienhe">
+            Liên hệ
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'profile' %}" class="account">
+                👤 {{ user.first_name|default:user.username }}
+            </a>
+
+            <a href="{% url 'logout' %}" class="account">
+                Đăng xuất
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}" class="account">
+                Đăng nhập
+            </a>
+
+            <a href="{% url 'register' %}" class="account">
+                Đăng ký
+            </a>
+
+        {% endif %}
+
+
+        <a href="{% url 'cart' %}" class="cart">
+            🛒 Giỏ hàng
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+
+    <!-- BREADCRUMB -->
+
+    <div class="breadcrumb">
+
+        <a href="{% url 'home' %}">
+            Trang chủ
+        </a>
+
+        <span>›</span>
+
+        {% if product.category %}
+
+            <span>{{ product.category.name }}</span>
+
+            <span>›</span>
+
+        {% endif %}
+
+        <strong>
+            {{ product.name }}
+        </strong>
+
+    </div>
+
+
+    <!-- =================================================
+         PRODUCT DETAIL
+    ================================================= -->
+
+    <div class="product-detail">
+
+
+        <!-- =========================
+             IMAGE
+        ========================== -->
+
+        <div class="product-image">
+
+            {% if product.image %}
+
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                >
+
+            {% else %}
+
+                <div class="no-image">
+
+                    {% if product.category.name == "Điện thoại" %}
+                        📱
+
+                    {% elif product.category.name == "Laptop" %}
+                        💻
+
+                    {% elif product.category.name == "Phụ kiện" %}
+                        🎧
+
+                    {% elif product.category.name == "Đồng hồ" %}
+                        ⌚
+
+                    {% else %}
+                        🛍️
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
+
+
+            {% if product.quantity > 0 %}
+
+                <div class="stock-badge">
+                    ✓ Còn hàng
+                </div>
+
+            {% else %}
+
+                <div class="stock-badge out">
+                    ✕ Hết hàng
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =========================
+             INFORMATION
+        ========================== -->
+
+        <div class="product-info">
+
+
+            {% if product.category %}
+
+                <div class="category">
+                    {{ product.category.name }}
+                </div>
+
+            {% endif %}
+
+
+            <h1>
+                {{ product.name }}
+            </h1>
+
+
+            <div class="rating">
+
+                <span class="stars">
+                    ★★★★★
+                </span>
+
+                <span>
+                    Sản phẩm chính hãng
+                </span>
+
+            </div>
+
+
+            <!-- PRICE -->
+
+            <div class="price">
+
+                <span
+                    class="product-price"
+                    data-price="{{ product.price|floatformat:0 }}"
+                >
+                    {{ product.price|floatformat:0 }}
+                </span>đ
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="description-title">
+                📝 Mô tả sản phẩm
+            </div>
+
+
+            <div class="description">
+
+                {{ product.description }}
+
+            </div>
+
+
+            <!-- META -->
+
+            <div class="product-meta">
+
+
+                <div class="meta-item">
+
+                    <span class="meta-label">
+                        Tình trạng
+                    </span>
+
+                    {% if product.quantity > 0 %}
+
+                        <span class="meta-value available">
+                            Còn hàng
+                        </span>
+
+                    {% else %}
+
+                        <span class="meta-value unavailable">
+                            Hết hàng
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <span class="meta-label">
+                        Số lượng trong kho
+                    </span>
+
+                    <span class="meta-value">
+                        {{ product.quantity }} sản phẩm
+                    </span>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <span class="meta-label">
+                        Danh mục
+                    </span>
+
+                    <span class="meta-value">
+
+                        {% if product.category %}
+                            {{ product.category.name }}
+                        {% else %}
+                            Chưa phân loại
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <span class="meta-label">
+                        Cập nhật
+                    </span>
+
+                    <span class="meta-value">
+                        {{ product.updated_at|date:"d/m/Y" }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+
+                {% if product.quantity > 0 %}
+
+                    {% if user.is_authenticated %}
+
+                        <a
+                            href="{% url 'add_to_cart' product.id %}"
+                            class="buy-button"
+                        >
+                            🛒 Thêm vào giỏ hàng
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="buy-button"
+                        >
+                            🔐 Đăng nhập để mua
+                        </a>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <button
+                        class="buy-button disabled-button"
+                        disabled
+                    >
+                        Hết hàng
+                    </button>
+
+                {% endif %}
+
+
+                <a
+                    href="{% url 'home' %}#sanpham"
+                    class="back-button"
+                >
+                    ← Tiếp tục mua sắm
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SERVICES
+    ================================================= -->
+
+    <div class="services">
+
+
+        <div class="service">
+
+            <div class="service-icon">
+                🚚
+            </div>
+
+            <strong>
+                Giao hàng nhanh
+            </strong>
+
+            <span>
+                Đóng gói cẩn thận
+            </span>
+
+        </div>
+
+
+        <div class="service">
+
+            <div class="service-icon">
+                🔒
+            </div>
+
+            <strong>
+                Thanh toán an toàn
+            </strong>
+
+            <span>
+                Bảo mật thông tin
+            </span>
+
+        </div>
+
+
+        <div class="service">
+
+            <div class="service-icon">
+                ⭐
+            </div>
+
+            <strong>
+                Sản phẩm chất lượng
+            </strong>
+
+            <span>
+                Kiểm tra trước khi bán
+            </span>
+
+        </div>
+
+
+        <div class="service">
+
+            <div class="service-icon">
+                💬
+            </div>
+
+            <strong>
+                Hỗ trợ khách hàng
+            </strong>
+
+            <span>
+                Luôn sẵn sàng hỗ trợ
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         INFORMATION
+    ================================================= -->
+
+    <div class="information">
+
+        <h2>
+            📦 Thông tin sản phẩm
+        </h2>
+
+        <p>
+            {{ product.description }}
+        </p>
+
+    </div>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <h2>
+                🛒 Cong Store
+            </h2>
+
+            <p>
+                Cửa hàng trực tuyến mang đến trải nghiệm
+                mua sắm đơn giản, nhanh chóng và thuận tiện.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Liên kết
+            </h4>
+
+            <p>
+                Trang chủ
+            </p>
+
+            <p>
+                Sản phẩm
+            </p>
+
+            <p>
+                Danh mục
+            </p>
+
+            <p>
+                Liên hệ
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Hỗ trợ
+            </h4>
+
+            <p>
+                📞 0392 808 991
+            </p>
+
+            <p>
+                📧 nguyenxuancong2122006@gmail.com
+            </p>
+
+            <p>
+                🕒 08:00 - 23:00
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Cong Store · Nguyễn Xuân Công - 24CT1
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

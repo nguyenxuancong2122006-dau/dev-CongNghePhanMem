@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,172 +8,475 @@
     <title>Cong Store - Cửa hàng trực tuyến</title>
 
     <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #333;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* ================= NAVBAR ================= */
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f6f8fc;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
 
         .navbar {
-            background: #1e3a8a;
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 9999;
+
+            height: 76px;
+            padding: 0 6%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid #e8ebf2;
+
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
         }
 
         .logo {
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #172554;
             font-size: 25px;
-            font-weight: bold;
+            font-weight: 800;
+            white-space: nowrap;
         }
 
-        .menu {
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
             display: flex;
             align-items: center;
-            gap: 20px;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        .menu a:hover {
-            color: #93c5fd;
-        }
-
-        .cart {
-            background: white;
-            color: #1e3a8a !important;
-            padding: 9px 15px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .account {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            min-height: 500px;
-            display: flex;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 50px 20px;
+
+            border-radius: 12px;
 
             background: linear-gradient(
                 135deg,
                 #2563eb,
                 #7c3aed
             );
+
+            color: white;
+            font-size: 22px;
+
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .menu a {
+            padding: 10px 13px;
+
+            color: #475569;
+            font-size: 15px;
+            font-weight: 600;
+
+            border-radius: 10px;
+
+            transition: 0.25s ease;
+        }
+
+        .menu a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .cart {
+            background: #2563eb !important;
+            color: white !important;
+
+            padding: 10px 17px !important;
+
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        .cart:hover {
+            background: #1d4ed8 !important;
+            color: white !important;
+            transform: translateY(-1px);
+        }
+
+        .account {
+            color: #475569 !important;
+        }
+
+
+        /* =====================================================
+           MESSAGES
+        ===================================================== */
+
+        .messages {
+            width: 88%;
+            max-width: 1200px;
+            margin: 18px auto 0;
+        }
+
+        .message {
+            padding: 14px 18px;
+
+            border-radius: 12px;
+
+            background: #ecfdf5;
+            border: 1px solid #bbf7d0;
+
+            color: #166534;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 560px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 80px 7%;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(124, 58, 237, 0.35),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 15% 80%,
+                    rgba(37, 99, 235, 0.35),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f2a63,
+                    #2563eb 55%,
+                    #6d28d9
+                );
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            right: -100px;
+            bottom: -130px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.08);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            left: -70px;
+            top: -70px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.08);
         }
 
         .hero-content {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            max-width: 1200px;
+
+            margin: auto;
+
             color: white;
-            max-width: 850px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.12);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            backdrop-filter: blur(8px);
+
+            margin-bottom: 22px;
         }
 
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+            max-width: 800px;
+
+            font-size: clamp(40px, 5vw, 64px);
+            line-height: 1.1;
+
+            margin-bottom: 22px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            color: #bfdbfe;
         }
 
         .hero p {
-            font-size: 20px;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            max-width: 680px;
+
+            color: #e0e7ff;
+
+            font-size: 19px;
+            line-height: 1.8;
+
+            margin-bottom: 32px;
         }
 
-        .button {
-            display: inline-block;
-            padding: 14px 30px;
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 14px 24px;
+
+            border-radius: 12px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .hero-button.primary {
             background: white;
             color: #2563eb;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.3s;
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
         }
 
-        .button:hover {
+        .hero-button.primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.22);
         }
 
-        /* ================= CONTAINER ================= */
+        .hero-button.secondary {
+            color: white;
+
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.10);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
 
         .container {
-            width: 85%;
-            max-width: 1100px;
-            margin: 60px auto;
+            width: 88%;
+            max-width: 1200px;
+
+            margin: 80px auto;
         }
 
-        .title {
+        .section-heading {
+            margin-bottom: 38px;
+        }
+
+        .section-heading.center {
             text-align: center;
-            margin-bottom: 40px;
         }
 
-        .title h2 {
-            font-size: 32px;
-            color: #1e3a8a;
+        .section-label {
+            display: inline-block;
+
+            color: #2563eb;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .section-heading h2 {
+            color: #172554;
+
+            font-size: 34px;
+            line-height: 1.2;
+
             margin-bottom: 10px;
         }
 
-        .title p {
-            color: #666;
+        .section-heading p {
+            color: #64748b;
+            font-size: 16px;
         }
 
-        /* ================= CATEGORY ================= */
+
+        /* =====================================================
+           CATEGORY
+        ===================================================== */
 
         .categories {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 60px;
         }
 
         .category {
-            background: white;
+            position: relative;
+            overflow: hidden;
+
+            min-height: 180px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
             padding: 25px;
-            border-radius: 15px;
+
+            background: white;
+
+            border: 1px solid #e9edf5;
+            border-radius: 18px;
+
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: 0.3s;
+
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+
+            transition: 0.3s ease;
+        }
+
+        .category::after {
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+            height: 90px;
+
+            right: -35px;
+            top: -35px;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
         }
 
         .category:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-7px);
+
+            border-color: #bfdbfe;
+
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
         }
 
-        .category .icon {
-            font-size: 45px;
-            margin-bottom: 12px;
+        .category-icon {
+            position: relative;
+            z-index: 1;
+
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 17px;
+
+            background: linear-gradient(
+                135deg,
+                #eff6ff,
+                #eef2ff
+            );
+
+            font-size: 30px;
+
+            margin-bottom: 14px;
         }
 
         .category h3 {
-            color: #1e3a8a;
+            position: relative;
+            z-index: 1;
+
+            color: #172554;
+
+            font-size: 17px;
         }
 
-        /* ================= PRODUCTS ================= */
+        .category p {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 5px;
+
+            color: #64748b;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           PRODUCT SECTION
+        ===================================================== */
 
         .products {
             display: grid;
@@ -181,70 +485,138 @@
         }
 
         .product {
-            background: white;
-            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: 0.3s;
+
+            background: white;
+
+            border: 1px solid #e7ebf3;
+            border-radius: 18px;
+
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+
+            transition: 0.3s ease;
         }
 
         .product:hover {
             transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+
+            border-color: #dbeafe;
         }
 
         .product-image {
-            height: 220px;
+            position: relative;
+
+            height: 250px;
+
             display: flex;
-            justify-content: center;
             align-items: center;
-            background: #eef2ff;
+            justify-content: center;
+
             overflow: hidden;
+
+            background: #f1f5f9;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
+            transition: 0.5s ease;
+        }
+
+        .product:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .product-tag {
+            position: absolute;
+
+            left: 14px;
+            top: 14px;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .no-image {
-            font-size: 90px;
+            font-size: 75px;
+            opacity: 0.75;
         }
 
         .product-info {
-            padding: 25px;
-        }
-
-        .product-info h3 {
-            color: #1e3a8a;
-            margin-bottom: 10px;
-            font-size: 20px;
+            padding: 22px;
         }
 
         .category-name {
-            color: #7c3aed;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
+            display: inline-block;
+
+            color: #2563eb;
+
+            background: #eff6ff;
+
+            padding: 5px 9px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            margin-bottom: 11px;
+        }
+
+        .product-info h3 {
+            color: #172033;
+
+            font-size: 19px;
+
+            margin-bottom: 9px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .description {
-            color: #666;
-            line-height: 1.5;
+            min-height: 48px;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 15px;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
             margin-bottom: 15px;
         }
 
         .price {
             color: #e11d48;
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
+
+            font-size: 21px;
+            font-weight: 800;
         }
 
         .stock {
-            font-size: 14px;
-            margin-bottom: 15px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .in-stock {
@@ -256,158 +628,426 @@
         }
 
         .buy-button {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
             width: 100%;
+
             padding: 12px;
+
             background: #2563eb;
             color: white;
-            border: none;
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
         }
 
         .buy-button:hover {
-            background: #1e40af;
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
         }
 
         .disabled-button {
-            background: #9ca3af;
+            background: #cbd5e1;
+            color: #64748b;
+
             cursor: not-allowed;
         }
 
         .disabled-button:hover {
-            background: #9ca3af;
+            background: #cbd5e1;
+            transform: none;
         }
 
-        /* ================= MESSAGE ================= */
+        .detail-link {
+            display: block;
 
-        .messages {
-            width: 85%;
-            max-width: 1100px;
-            margin: 20px auto 0;
+            margin-top: 12px;
+
+            color: #2563eb;
+
+            text-align: center;
+
+            font-size: 13px;
+            font-weight: 600;
         }
 
-        .message {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background: #dbeafe;
-            color: #1e3a8a;
+        .detail-link:hover {
+            text-decoration: underline;
         }
 
-        /* ================= EMPTY ================= */
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
 
         .empty {
             grid-column: 1 / -1;
+
+            padding: 60px 25px;
+
             background: white;
-            padding: 50px;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+
             text-align: center;
-            border-radius: 15px;
-            color: #666;
         }
 
-        /* ================= PROMOTION ================= */
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            color: #172554;
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #64748b;
+        }
+
+        .admin-link {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           BENEFITS
+        ===================================================== */
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            border: 1px solid #e5e7eb;
+
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+        }
+
+        .benefit {
+            padding: 28px 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .benefit:last-child {
+            border-right: none;
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            font-size: 23px;
+        }
+
+        .benefit strong {
+            display: block;
+
+            color: #172554;
+
+            font-size: 14px;
+
+            margin-bottom: 3px;
+        }
+
+        .benefit span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           PROMOTION
+        ===================================================== */
 
         .promotion {
-            margin-top: 60px;
-            padding: 45px;
-            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+
+            padding: 55px 40px;
+
+            border-radius: 24px;
+
             text-align: center;
+
             color: white;
 
-            background: linear-gradient(
-                135deg,
-                #1e3a8a,
-                #7c3aed
-            );
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255,255,255,0.13),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(255,255,255,0.13),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #172554,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.18);
         }
 
         .promotion h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
+            font-size: 34px;
+            margin-bottom: 10px;
         }
 
         .promotion p {
-            font-size: 18px;
+            color: #dbeafe;
+
+            font-size: 17px;
+
             margin-bottom: 25px;
         }
 
-        /* ================= CONTACT ================= */
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
 
         .contact {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+
+            gap: 25px;
         }
 
         .contact-box {
-            background: white;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+            background: white;
+
+            border: 1px solid #e7ebf3;
+
+            border-radius: 18px;
+
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
         }
 
         .contact-box h3 {
-            color: #1e3a8a;
+            color: #172554;
+
+            font-size: 21px;
+
             margin-bottom: 20px;
         }
 
-        .contact-box p {
-            margin-bottom: 12px;
-            line-height: 1.6;
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            color: #475569;
+
+            font-size: 14px;
+        }
+
+        .contact-item-icon {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #eff6ff;
+
+            font-size: 17px;
         }
 
         .contact-box input,
         .contact-box textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: Arial;
+
+            padding: 13px 14px;
+
+            margin-bottom: 13px;
+
+            border: 1px solid #dbe1ea;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .contact-box input:focus,
+        .contact-box textarea:focus {
+            border-color: #2563eb;
+
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
         }
 
         .contact-box textarea {
-            height: 120px;
-            resize: none;
+            height: 110px;
+
+            resize: vertical;
         }
 
         .submit-button {
             width: 100%;
-            padding: 12px;
-            background: #2563eb;
-            color: white;
+
+            padding: 13px;
+
             border: none;
-            border-radius: 8px;
-            font-weight: bold;
+
+            border-radius: 10px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-weight: 700;
+
             cursor: pointer;
+
+            transition: 0.25s;
         }
 
         .submit-button:hover {
-            background: #1e40af;
+            background: #1d4ed8;
         }
 
-        /* ================= FOOTER ================= */
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
 
         footer {
-            background: #111827;
+            margin-top: 80px;
+
+            padding: 45px 7% 25px;
+
+            background: #0f172a;
+
+            color: #94a3b8;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 35px;
+        }
+
+        .footer-brand h2 {
             color: white;
+
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            max-width: 400px;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            color: white;
+
+            margin-bottom: 14px;
+        }
+
+        .footer-column p {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding-top: 22px;
+
+            border-top: 1px solid #1e293b;
+
             text-align: center;
-            padding: 30px;
-            margin-top: 60px;
+
+            font-size: 13px;
         }
 
-        footer p {
-            margin: 5px;
-        }
 
-        /* ================= RESPONSIVE ================= */
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
 
-        @media (max-width: 900px) {
+        @media (max-width: 1050px) {
+
+            .navbar {
+                padding: 0 3%;
+            }
+
+            .menu {
+                gap: 2px;
+            }
+
+            .menu a {
+                padding: 9px 8px;
+                font-size: 14px;
+            }
 
             .categories {
                 grid-template-columns: repeat(2, 1fr);
@@ -417,30 +1057,82 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .contact {
-                grid-template-columns: 1fr;
+            .benefits {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefit:nth-child(2) {
+                border-right: none;
+            }
+
+            .benefit:nth-child(-n+2) {
+                border-bottom: 1px solid #e5e7eb;
             }
         }
 
-        @media (max-width: 768px) {
+
+        @media (max-width: 800px) {
 
             .navbar {
+                height: auto;
+
+                padding: 14px 5%;
+
                 flex-direction: column;
-                gap: 15px;
+
+                gap: 12px;
             }
 
             .menu {
-                gap: 12px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
 
+            .hero {
+                min-height: 500px;
+
+                padding: 65px 6%;
+            }
+
             .hero h1 {
-                font-size: 34px;
+                font-size: 42px;
             }
 
             .hero p {
                 font-size: 17px;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 90%;
+                margin: 60px auto;
+            }
+
+            .hero {
+                min-height: 520px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-button {
+                width: 100%;
             }
 
             .categories,
@@ -448,12 +1140,34 @@
                 grid-template-columns: 1fr;
             }
 
-            .container {
-                width: 90%;
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit {
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .benefit:last-child {
+                border-bottom: none;
+            }
+
+            .section-heading h2 {
+                font-size: 28px;
+            }
+
+            .promotion {
+                padding: 40px 22px;
+            }
+
+            .promotion h2 {
+                font-size: 28px;
             }
         }
     </style>
 </head>
+
 
 <body>
 
@@ -464,9 +1178,16 @@
 
 <nav class="navbar">
 
-    <div class="logo">
-        🛒 Cong Store
-    </div>
+    <a href="{% url 'home' %}" class="logo">
+
+        <span class="logo-icon">
+            🛒
+        </span>
+
+        <span>Cong Store</span>
+
+    </a>
+
 
     <div class="menu">
 
@@ -500,11 +1221,11 @@
         {% else %}
 
             <a href="{% url 'login' %}" class="account">
-                🔐 Đăng nhập
+                Đăng nhập
             </a>
 
             <a href="{% url 'register' %}" class="account">
-                📝 Đăng ký
+                Đăng ký
             </a>
 
         {% endif %}
@@ -530,7 +1251,7 @@
     {% for message in messages %}
 
         <div class="message">
-            {{ message }}
+            ✅ {{ message }}
         </div>
 
     {% endfor %}
@@ -538,6 +1259,7 @@
 </div>
 
 {% endif %}
+
 
 
 <!-- =====================================================
@@ -548,24 +1270,39 @@
 
     <div class="hero-content">
 
+        <div class="hero-badge">
+            ✨ Chào mừng bạn đến với Cong Store
+        </div>
+
         <h1>
-            Chào mừng đến với Cong Store
+            Mua sắm thông minh.
+            <br>
+            <span>Chọn lựa dễ dàng.</span>
         </h1>
 
         <p>
-            Cửa hàng trực tuyến cung cấp những sản phẩm
-            chất lượng với giá tốt nhất.
-            <br>
-            Mua sắm dễ dàng - Nhanh chóng - Uy tín.
+            Khám phá những sản phẩm chất lượng với mức giá hợp lý.
+            Trải nghiệm mua sắm nhanh chóng, tiện lợi và đáng tin cậy
+            ngay tại Cong Store.
         </p>
 
-        <a href="#sanpham" class="button">
-            🛍️ Mua sắm ngay
-        </a>
+
+        <div class="hero-buttons">
+
+            <a href="#sanpham" class="hero-button primary">
+                🛍️ Xem sản phẩm
+            </a>
+
+            <a href="#danhmuc" class="hero-button secondary">
+                Khám phá danh mục →
+            </a>
+
+        </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -574,14 +1311,18 @@
 
 <section class="container" id="danhmuc">
 
-    <div class="title">
+    <div class="section-heading center">
+
+        <span class="section-label">
+            Khám phá
+        </span>
 
         <h2>
             Danh mục sản phẩm
         </h2>
 
         <p>
-            Khám phá các sản phẩm đang được bán tại cửa hàng
+            Tìm kiếm sản phẩm phù hợp với nhu cầu của bạn
         </p>
 
     </div>
@@ -593,7 +1334,7 @@
 
             <div class="category">
 
-                <div class="icon">
+                <div class="category-icon">
 
                     {% if category.name == "Điện thoại" %}
                         📱
@@ -613,14 +1354,16 @@
 
                 </div>
 
+
                 <h3>
                     {{ category.name }}
                 </h3>
 
+
                 {% if category.description %}
 
-                    <p style="margin-top: 8px; color: #666;">
-                        {{ category.description }}
+                    <p>
+                        {{ category.description|truncatechars:45 }}
                     </p>
 
                 {% endif %}
@@ -630,6 +1373,10 @@
         {% empty %}
 
             <div class="empty">
+
+                <div class="empty-icon">
+                    📂
+                </div>
 
                 <h3>
                     Chưa có danh mục
@@ -648,16 +1395,21 @@
 </section>
 
 
+
 <!-- =====================================================
      SẢN PHẨM
 ===================================================== -->
 
 <section class="container" id="sanpham">
 
-    <div class="title">
+    <div class="section-heading">
+
+        <span class="section-label">
+            Sản phẩm
+        </span>
 
         <h2>
-            Sản phẩm nổi bật
+            🔥 Sản phẩm nổi bật
         </h2>
 
         <p>
@@ -710,20 +1462,31 @@
 
                 {% endif %}
 
+
+                {% if product.quantity > 0 %}
+
+                    <div class="product-tag">
+                        Còn hàng
+                    </div>
+
+                {% endif %}
+
             </div>
+
 
 
             <!-- THÔNG TIN -->
 
             <div class="product-info">
 
-                <div class="category-name">
 
-                    {% if product.category %}
+                {% if product.category %}
+
+                    <div class="category-name">
                         {{ product.category.name }}
-                    {% endif %}
+                    </div>
 
-                </div>
+                {% endif %}
 
 
                 <h3>
@@ -733,40 +1496,37 @@
 
                 <p class="description">
 
-                    {{ product.description|truncatechars:100 }}
+                    {{ product.description|truncatechars:90 }}
 
                 </p>
 
 
-                <div class="price">
+                <div class="product-bottom">
 
-                    {{ product.price|floatformat:0 }}đ
+                    <div class="price">
+                        <span class="product-price" data-price="{{ product.price|floatformat:0 }}">{{ product.price|floatformat:0 }}</span>đ
+                    </div>
+
+
+                    {% if product.quantity > 0 %}
+
+                        <div class="stock in-stock">
+                            ✓ Còn {{ product.quantity }}
+                        </div>
+
+                    {% else %}
+
+                        <div class="stock out-stock">
+                            ✕ Hết hàng
+                        </div>
+
+                    {% endif %}
 
                 </div>
 
 
-                <!-- KHO -->
 
-                {% if product.quantity > 0 %}
-
-                    <div class="stock in-stock">
-
-                        ✅ Còn {{ product.quantity }} sản phẩm
-
-                    </div>
-
-                {% else %}
-
-                    <div class="stock out-stock">
-
-                        ❌ Hết hàng
-
-                    </div>
-
-                {% endif %}
-
-
-                <!-- BUTTON -->
+                <!-- MUA HÀNG -->
 
                 {% if product.quantity > 0 %}
 
@@ -804,15 +1564,9 @@
 
                 <a
                     href="{% url 'product_detail' product.id %}"
-                    style="
-                        display:block;
-                        text-align:center;
-                        margin-top:12px;
-                        color:#2563eb;
-                        text-decoration:none;
-                    "
+                    class="detail-link"
                 >
-                    Xem chi tiết →
+                    Xem chi tiết sản phẩm →
                 </a>
 
             </div>
@@ -824,27 +1578,23 @@
 
             <div class="empty">
 
+                <div class="empty-icon">
+                    🛍️
+                </div>
+
                 <h3>
-                    🛍️ Chưa có sản phẩm
+                    Chưa có sản phẩm
                 </h3>
 
-                <p style="margin-top:10px;">
-
+                <p>
                     Hãy vào trang quản trị để thêm sản phẩm.
-
                 </p>
 
                 <a
                     href="/admin/"
-                    style="
-                        display:inline-block;
-                        margin-top:20px;
-                        color:#2563eb;
-                        font-weight:bold;
-                        text-decoration:none;
-                    "
+                    class="admin-link"
                 >
-                    Đi đến quản trị →
+                    Đi đến trang quản trị →
                 </a>
 
             </div>
@@ -855,6 +1605,78 @@
     </div>
 
 </section>
+
+
+
+<!-- =====================================================
+     ƯU ĐIỂM
+===================================================== -->
+
+<section class="container">
+
+    <div class="benefits">
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                🚚
+            </div>
+
+            <div>
+                <strong>Giao hàng nhanh</strong>
+                <span>Đóng gói cẩn thận</span>
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                🔒
+            </div>
+
+            <div>
+                <strong>Thanh toán an toàn</strong>
+                <span>Bảo mật thông tin</span>
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                ⭐
+            </div>
+
+            <div>
+                <strong>Sản phẩm chất lượng</strong>
+                <span>Kiểm tra kỹ trước khi bán</span>
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                💬
+            </div>
+
+            <div>
+                <strong>Hỗ trợ khách hàng</strong>
+                <span>Sẵn sàng hỗ trợ bạn</span>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
 
 
 <!-- =====================================================
@@ -870,16 +1692,17 @@
         </h2>
 
         <p>
-            Giảm đến 30% cho các sản phẩm trong tháng này!
+            Khám phá những sản phẩm hấp dẫn đang có tại Cong Store.
         </p>
 
-        <a href="#sanpham" class="button">
-            Xem sản phẩm
+        <a href="#sanpham" class="hero-button primary">
+            Xem sản phẩm ngay →
         </a>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -888,15 +1711,18 @@
 
 <section class="container" id="lienhe">
 
-    <div class="title">
+    <div class="section-heading center">
+
+        <span class="section-label">
+            Liên hệ
+        </span>
 
         <h2>
-            Liên hệ với chúng tôi
+            Chúng tôi luôn sẵn sàng hỗ trợ
         </h2>
 
         <p>
-            Nếu bạn có bất kỳ câu hỏi nào,
-            hãy liên hệ với Cong Store
+            Hãy liên hệ với Cong Store nếu bạn cần hỗ trợ.
         </p>
 
     </div>
@@ -905,36 +1731,90 @@
     <div class="contact">
 
 
+        <!-- THÔNG TIN -->
+
         <div class="contact-box">
 
             <h3>
-                📞 Thông tin cửa hàng
+                📍 Thông tin cửa hàng
             </h3>
 
-            <p>
-                📍 Địa chỉ: Việt Nam
-            </p>
 
-            <p>
-                📞 Điện thoại: 0392 808 991
-            </p>
+            <div class="contact-info">
 
-            <p>
-                📧 Email: nguyenxuancong2122006@gmail.com
-            </p>
+                <div class="contact-item">
 
-            <p>
-                🕒 Thời gian: 08:00 - 23:00
-            </p>
+                    <div class="contact-item-icon">
+                        📍
+                    </div>
+
+                    <div>
+                        <strong>Địa chỉ</strong>
+                        <br>
+                        Việt Nam
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-item-icon">
+                        📞
+                    </div>
+
+                    <div>
+                        <strong>Điện thoại</strong>
+                        <br>
+                        0392 808 991
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-item-icon">
+                        📧
+                    </div>
+
+                    <div>
+                        <strong>Email</strong>
+                        <br>
+                        nguyenxuancong2122006@gmail.com
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-item-icon">
+                        🕒
+                    </div>
+
+                    <div>
+                        <strong>Thời gian hoạt động</strong>
+                        <br>
+                        08:00 - 23:00
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
+
+
+        <!-- FORM -->
 
         <div class="contact-box">
 
             <h3>
                 ✉️ Gửi tin nhắn
             </h3>
+
 
             <form method="POST">
 
@@ -957,11 +1837,12 @@
                     required
                 ></textarea>
 
+
                 <button
                     type="submit"
                     class="submit-button"
                 >
-                    Gửi liên hệ
+                    Gửi tin nhắn →
                 </button>
 
             </form>
@@ -973,25 +1854,97 @@
 </section>
 
 
+
 <!-- =====================================================
      FOOTER
 ===================================================== -->
 
 <footer>
 
-    <p>
-        © 2026 - Cong Store
-    </p>
+    <div class="footer-content">
 
-    <p>
-        Nguyễn Xuân Công - 24CT1
-    </p>
 
-    <p>
-        Website bán hàng trực tuyến
-    </p>
+        <div class="footer-brand">
+
+            <h2>
+                🛒 Cong Store
+            </h2>
+
+            <p>
+                Cửa hàng trực tuyến mang đến trải nghiệm
+                mua sắm đơn giản, nhanh chóng và thuận tiện.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Liên kết
+            </h4>
+
+            <p>
+                Trang chủ
+            </p>
+
+            <p>
+                Sản phẩm
+            </p>
+
+            <p>
+                Danh mục
+            </p>
+
+            <p>
+                Liên hệ
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Hỗ trợ
+            </h4>
+
+            <p>
+                📞 0392 808 991
+            </p>
+
+            <p>
+                📧 Email hỗ trợ
+            </p>
+
+            <p>
+                🕒 08:00 - 23:00
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Cong Store · Nguyễn Xuân Công - 24CT1
+
+    </div>
 
 </footer>
+
+
+    <script>
+        // Định dạng giá theo kiểu Việt Nam: 18.990.000đ
+        document.querySelectorAll('.product-price').forEach(function (el) {
+            const value = Number(el.dataset.price);
+            if (!Number.isNaN(value)) {
+                el.textContent = value.toLocaleString('vi-VN');
+            }
+        });
+    </script>
 
 </body>
 </html>

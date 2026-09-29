@@ -344,12 +344,10 @@ class Order(models.Model):
         (STATUS_CANCELLED, 'Đã hủy'),
     ]
 
-    PAYMENT_COD = 'cod'
-    PAYMENT_BANK = 'bank'
+    PAYMENT_QR = 'qr'
 
     PAYMENT_CHOICES = [
-        (PAYMENT_COD, 'Thanh toán khi nhận hàng'),
-        (PAYMENT_BANK, 'Chuyển khoản ngân hàng'),
+        (PAYMENT_QR, 'Thanh toán bằng mã QR'),
     ]
 
     customer = models.ForeignKey(
@@ -399,7 +397,7 @@ class Order(models.Model):
     payment_method = models.CharField(
         max_length=20,
         choices=PAYMENT_CHOICES,
-        default=PAYMENT_COD,
+        default=PAYMENT_QR,
         verbose_name='Phương thức thanh toán'
     )
 
