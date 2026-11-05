@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from django.core.management.base import BaseCommand
-from django.core.management import call_command
+from django.core.management import BaseCommand, call_command
+from django.db import transaction
 
 
 class Command(BaseCommand):
@@ -18,7 +18,9 @@ class Command(BaseCommand):
         with data_file.open("r", encoding="utf-8") as file:
             data = json.load(file)
 
-        call_command("loaddata", str(data_file))
-        self.stdout.write(self.style.SUCCESS(
-            f"Đã nhập {len(data)} bản ghi danh mục và sản phẩm."
-        ))
+        with transaction.atomic():
+            call_command("loaddata", str(data_file))
+
+        self.stdout.write(
+            self.style.SUCCESS(f"Đã import {len(data)} bản ghi.")
+        )
