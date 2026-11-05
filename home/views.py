@@ -33,11 +33,18 @@ def serve_product_image(request, filename):
 
 def check_media(request):
     folder = Path(settings.MEDIA_ROOT) / "products"
-    return JsonResponse({
-        "media_root": str(settings.MEDIA_ROOT),
-        "folder_exists": folder.exists(),
-        "files": [f.name for f in folder.iterdir()] if folder.exists() else [],
-    })
+    files = []
+
+    if folder.exists():
+        for f in folder.iterdir():
+            files.append({
+                "name": f.name,
+                "url": request.build_absolute_uri(
+                    settings.MEDIA_URL + "products/" + f.name
+                ),
+            })
+
+    return JsonResponse({"files": files}, json_dumps_params={"ensure_ascii": False})
 
 from .models import (
 
