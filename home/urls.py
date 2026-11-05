@@ -6,6 +6,9 @@ from . import views
 
 from home.views import serve_product_image
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
 
@@ -143,3 +146,4 @@ urlpatterns = [
     path("media/products/<path:filename>", serve_product_image),
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
