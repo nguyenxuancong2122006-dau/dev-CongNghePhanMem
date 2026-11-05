@@ -4,6 +4,8 @@ from home.views import check_media
 
 from . import views
 
+from home.views import serve_product_image
+
 
 urlpatterns = [
 
@@ -137,5 +139,7 @@ urlpatterns = [
     ),
 
     path("check-media/", check_media),
+
+    path("media/products/<path:filename>", serve_product_image),
 
 ]

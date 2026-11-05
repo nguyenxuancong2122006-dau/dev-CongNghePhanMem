@@ -19,6 +19,17 @@ from django.views.decorators.http import require_POST
 from pathlib import Path
 from django.conf import settings
 from django.http import JsonResponse
+from pathlib import Path
+from django.conf import settings
+from django.http import FileResponse, Http404
+
+def serve_product_image(request, filename):
+    image_path = Path(settings.MEDIA_ROOT) / "products" / filename
+
+    if not image_path.is_file():
+        raise Http404("Image not found")
+
+    return FileResponse(open(image_path, "rb"))
 
 def check_media(request):
     folder = Path(settings.MEDIA_ROOT) / "products"
