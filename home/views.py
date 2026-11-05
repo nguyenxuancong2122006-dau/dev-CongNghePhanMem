@@ -1236,11 +1236,11 @@ def profile(request):
 
         request.user.save()
 
-        customer.phone = phone
+        profile.phone = phone
 
-        customer.address = address
+        profile.address = address
 
-        customer.save()
+        profile.save()
 
         messages.success(
 
