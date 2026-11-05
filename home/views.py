@@ -1254,7 +1254,7 @@ def profile(request):
 
     context = {
 
-        'customer': customer,
+        'customer': profile,
 
     }
 
