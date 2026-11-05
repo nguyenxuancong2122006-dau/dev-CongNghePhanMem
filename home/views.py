@@ -728,7 +728,9 @@ def checkout(request):
 
     try:
 
-        customer = request.user.profile
+        customer, created = UserProfile.objects.get_or_create(
+    user=request.user
+    )
 
     except Exception:
 
@@ -1178,7 +1180,9 @@ def checkout(request):
 
 def profile(request):
 
-    customer = request.user.profile
+    profile, created = UserProfile.objects.get_or_create(
+    user=request.user
+)
 
     if request.method == 'POST':
 
