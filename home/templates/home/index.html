@@ -1504,7 +1504,9 @@
                 <div class="product-bottom">
 
                     <div class="price">
-                        <span class="product-price" data-price="{{ product.price|floatformat:0 }}">{{ product.price|floatformat:0 }}</span>đ
+                        <span class="product-price">
+    {{ product.price|floatformat:0|intcomma }}
+</span>đ
                     </div>
 
 
@@ -1938,7 +1940,7 @@
 
     <script>
         // Định dạng giá theo kiểu Việt Nam: 18.990.000đ
-        document.querySelectorAll('.product-price').forEach(function (el) {
+            document.querySelectorAll('.product-price').forEach(function (el) {
             const value = Number(el.dataset.price);
             if (!Number.isNaN(value)) {
                 el.textContent = value.toLocaleString('vi-VN');
