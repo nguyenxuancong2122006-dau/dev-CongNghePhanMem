@@ -16,6 +16,8 @@ from decimal import Decimal
 
 from django.views.decorators.http import require_POST
 
+from .models import Product, Category, UserProfile
+
 from pathlib import Path
 from django.conf import settings
 from django.http import JsonResponse
