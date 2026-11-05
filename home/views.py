@@ -16,7 +16,7 @@ from decimal import Decimal
 
 from django.views.decorators.http import require_POST
 
-from .models import Product, Category, UserProfile
+from .models import Product, Category, CustomerProfile
 
 from pathlib import Path
 from django.conf import settings
@@ -1182,7 +1182,7 @@ def checkout(request):
 
 def profile(request):
 
-    profile, created = UserProfile.objects.get_or_create(
+    profile, created = CustomerProfile.objects.get_or_create(
     user=request.user
 )
 
