@@ -3,4 +3,171 @@
   "model": "home.category",
   "pk": 1,
   "fields": {
-    "name": 
+    "name": "Điện thoại",
+    "description": "Điện thoại thông minh chính hãng",
+    "created_at": "2026-09-28T04:25:23.894Z"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 2,
+  "fields": {
+    "name": "Laptop",
+    "description": "Laptop học tập và làm việc",
+    "created_at": "2026-09-28T04:25:38.069Z"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 3,
+  "fields": {
+    "name": "Phụ kiện",
+    "description": "Tai nghe, chuột, bàn phím và phụ kiện",
+    "created_at": "2026-09-28T04:26:26.382Z"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 4,
+  "fields": {
+    "name": "Đồng hồ",
+    "description": "Đồng hồ thời trang và thông minh",
+    "created_at": "2026-09-28T04:26:39.775Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "name": "iPhone 15",
+    "description": "iPhone 15 với thiết kế hiện đại, hiệu năng mạnh mẽ, camera chất lượng cao và thời lượng pin tốt. Sản phẩm phù hợp cho học tập, làm việc và giải trí hằng ngày.",
+    "price": "18990000",
+    "quantity": 20,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113138.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:32:34.196Z",
+    "updated_at": "2026-09-28T04:32:34.196Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "name": "Samsung Galaxy S24",
+    "description": "Samsung Galaxy S24 có thiết kế cao cấp, màn hình hiển thị sắc nét và hiệu năng mạnh mẽ. Hệ thống camera hỗ trợ chụp ảnh chất lượng cao, đáp ứng tốt nhu cầu học tập, làm việc và giải trí.",
+    "price": "16990000",
+    "quantity": 15,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113143.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:34:11.397Z",
+    "updated_at": "2026-09-28T11:53:32.503Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 3,
+  "fields": {
+    "category": 2,
+    "name": "MacBook Air M2",
+    "description": "MacBook Air M2 có thiết kế mỏng nhẹ, hiệu năng mạnh mẽ và thời lượng pin tốt. Sản phẩm phù hợp cho sinh viên, nhân viên văn phòng, lập trình, thiết kế và các nhu cầu làm việc hằng ngày.",
+    "price": "22990000",
+    "quantity": 10,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113151.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:36:07.602Z",
+    "updated_at": "2026-09-28T04:36:07.602Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 4,
+  "fields": {
+    "category": 2,
+    "name": "ASUS Vivobook 15",
+    "description": "ASUS Vivobook 15 sở hữu màn hình rộng, thiết kế hiện đại và hiệu năng ổn định. Phù hợp cho học tập, làm việc văn phòng, lập trình, xem phim và giải trí.",
+    "price": "15490000",
+    "quantity": 8,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113159.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:36:56.302Z",
+    "updated_at": "2026-09-28T04:36:56.302Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 5,
+  "fields": {
+    "category": 3,
+    "name": "AirPods Pro 2",
+    "description": "AirPods Pro 2 là tai nghe không dây nhỏ gọn với chất lượng âm thanh tốt. Thiết kế tiện lợi, phù hợp để nghe nhạc, xem video, học tập và thực hiện cuộc gọi hằng ngày.",
+    "price": "5990000",
+    "quantity": 25,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113205.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:38:34.489Z",
+    "updated_at": "2026-09-28T04:38:34.489Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 6,
+  "fields": {
+    "category": 3,
+    "name": "Logitech MX Master 3S",
+    "description": "Logitech MX Master 3S là chuột không dây thiết kế công thái học, mang lại cảm giác sử dụng thoải mái. Phù hợp cho học tập, làm việc văn phòng, lập trình và sử dụng máy tính trong thời gian dài.",
+    "price": "2490000",
+    "quantity": 21,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113209.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:39:24.757Z",
+    "updated_at": "2026-09-28T04:39:24.757Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 7,
+  "fields": {
+    "category": 4,
+    "name": "Apple Watch SE",
+    "description": "Apple Watch SE có thiết kế hiện đại, màn hình dễ sử dụng và nhiều tính năng tiện ích. Sản phẩm phù hợp để theo dõi hoạt động hằng ngày, nhận thông báo và hỗ trợ kết nối với điện thoại.",
+    "price": "6490000",
+    "quantity": 10,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113214.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:40:18.178Z",
+    "updated_at": "2026-09-28T04:40:18.178Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 8,
+  "fields": {
+    "category": 4,
+    "name": "Samsung Galaxy Watch 6",
+    "description": "Samsung Galaxy Watch 6 sở hữu thiết kế hiện đại, màn hình sắc nét và nhiều tính năng thông minh. Đồng hồ hỗ trợ theo dõi hoạt động hằng ngày, nhận thông báo và kết nối thuận tiện với điện thoại.",
+    "price": "5990000",
+    "quantity": 13,
+    "image": "products/Ảnh_chụp_màn_hình_2026-09-28_113219.png",
+    "is_active": true,
+    "created_at": "2026-09-28T04:41:11.037Z",
+    "updated_at": "2026-09-28T04:41:11.037Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 9,
+  "fields": {
+    "category": 3,
+    "name": "Dây sạc",
+    "description": "Dây hỗ trợ công suất sạc tối đa theo thông số của sản phẩm. Khả năng sạc thực tế phụ thuộc vào củ sạc, thiết bị và chuẩn sạc tương thích.",
+    "price": "20000",
+    "quantity": 7,
+    "image": "products/th.webp",
+    "is_active": true,
+    "created_at": "2026-09-28T13:18:38.693Z",
+    "updated_at": "2026-11-05T15:20:08.405Z"
+  }
+}
+]
