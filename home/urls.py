@@ -1,5 +1,7 @@
 from django.urls import path
 
+from home.views import check_media
+
 from . import views
 
 
@@ -133,5 +135,7 @@ urlpatterns = [
         views.cancel_order, 
         name='cancel_order' 
     ),
+
+    path("check-media/", check_media),
 
 ]

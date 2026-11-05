@@ -16,6 +16,18 @@ from decimal import Decimal
 
 from django.views.decorators.http import require_POST
 
+from pathlib import Path
+from django.conf import settings
+from django.http import JsonResponse
+
+def check_media(request):
+    folder = Path(settings.MEDIA_ROOT) / "products"
+    return JsonResponse({
+        "media_root": str(settings.MEDIA_ROOT),
+        "folder_exists": folder.exists(),
+        "files": [f.name for f in folder.iterdir()] if folder.exists() else [],
+    })
+
 from .models import (
 
     Product,
