@@ -1,825 +1,1632 @@
 
+
 <!DOCTYPE html>
+
 <html lang="vi">
+
+
 
 <head>
 
+
+
     <meta charset="UTF-8">
 
+
+
     <meta name="viewport"
+
           content="width=device-width, initial-scale=1.0">
+
+
 
     <title>Chi tiết đơn hàng - Cong Store</title>
 
+
+
     <style>
 
+
+
         * {
+
             box-sizing: border-box;
+
         }
+
+
 
         body {
+
             margin: 0;
+
             font-family: Arial, sans-serif;
+
             background: #f5f7fb;
+
             color: #333;
+
         }
+
+
 
         .navbar {
+
             background: #111827;
+
             color: white;
+
             padding: 18px 7%;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
         }
+
+
 
         .logo {
+
             font-size: 24px;
+
             font-weight: bold;
+
         }
+
+
 
         .menu {
+
             display: flex;
+
             gap: 25px;
+
         }
+
+
 
         .menu a {
+
             color: white;
+
             text-decoration: none;
+
             font-size: 15px;
+
         }
+
+
 
         .menu a:hover {
+
             color: #60a5fa;
+
         }
+
+
 
         .container {
+
             width: 90%;
+
             max-width: 1100px;
+
             margin: 40px auto;
+
         }
+
+
 
         .back {
+
             display: inline-block;
+
             margin-bottom: 20px;
+
             color: #2563eb;
+
             text-decoration: none;
+
             font-weight: bold;
+
         }
+
+
 
         .title {
+
             margin-bottom: 25px;
+
         }
+
+
 
         .title h1 {
+
             margin: 0 0 8px;
+
             font-size: 30px;
+
         }
+
+
 
         .title p {
+
             color: #777;
+
             margin: 0;
+
         }
+
+
 
         .box {
+
             background: white;
+
             border-radius: 12px;
+
             padding: 25px;
+
             margin-bottom: 20px;
+
             box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+
         }
+
+
 
         .box h2 {
+
             margin-top: 0;
+
             margin-bottom: 20px;
+
             font-size: 21px;
+
         }
+
+
 
         .order-header {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             gap: 15px;
+
             flex-wrap: wrap;
+
         }
+
+
 
         .order-id {
+
             font-size: 22px;
+
             font-weight: bold;
+
         }
+
+
 
         .status {
+
             padding: 8px 15px;
+
             border-radius: 20px;
+
             background: #fef3c7;
+
             color: #92400e;
+
             font-weight: bold;
+
         }
+
+
 
         .info-grid {
+
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 15px;
+
         }
+
+
 
         .info-item {
+
             background: #f8fafc;
+
             padding: 15px;
+
             border-radius: 8px;
+
         }
+
+
 
         .info-item strong {
+
             display: block;
+
             margin-bottom: 6px;
+
             color: #555;
+
         }
+
+
 
         .product {
+
             display: flex;
+
             align-items: center;
+
             gap: 18px;
+
             padding: 18px 0;
+
             border-bottom: 1px solid #eee;
+
         }
+
+
 
         .product:last-child {
+
             border-bottom: none;
+
         }
+
+
 
         .product-image {
+
             width: 90px;
+
             height: 90px;
+
             border-radius: 8px;
+
             object-fit: cover;
+
             background: #eee;
+
         }
+
+
 
         .product-info {
+
             flex: 1;
+
         }
+
+
 
         .product-name {
+
             font-size: 17px;
+
             font-weight: bold;
+
             margin-bottom: 8px;
+
         }
+
+
 
         .product-detail {
+
             color: #777;
+
             font-size: 14px;
+
         }
+
+
 
         .product-price {
+
             font-weight: bold;
+
             color: #dc2626;
+
         }
+
+
 
         .summary {
+
             margin-top: 20px;
+
         }
+
+
 
         .summary-row {
+
             display: flex;
+
             justify-content: space-between;
+
             padding: 10px 0;
+
         }
+
+
 
         .discount {
+
             color: #16a34a;
+
         }
+
+
 
         .total {
+
             border-top: 1px solid #ddd;
+
             margin-top: 10px;
+
             padding-top: 18px;
+
             font-size: 21px;
+
             font-weight: bold;
+
             color: #dc2626;
+
         }
+
+
 
         .note {
+
             background: #fff7ed;
+
             padding: 15px;
+
             border-radius: 8px;
+
             color: #9a3412;
+
         }
 
+
+
         /* =========================
+
            THANH TOÁN
+
         ========================= */
+
+
 
         .payment-pending {
+
             background: #eff6ff;
+
             border: 1px solid #bfdbfe;
+
             border-radius: 10px;
+
             padding: 20px;
+
             text-align: center;
+
         }
+
+
 
         .payment-pending p {
+
             margin-top: 0;
+
             color: #374151;
+
         }
+
+
 
         .confirm-payment-button {
+
             display: inline-block;
+
             padding: 13px 25px;
+
             background: #16a34a;
+
             color: white;
+
             text-decoration: none;
+
             border-radius: 8px;
+
             font-weight: bold;
+
         }
+
+
 
         .confirm-payment-button:hover {
+
             background: #15803d;
+
         }
+
+
 
         .payment-confirmed {
+
             background: #f0fdf4;
+
             border: 1px solid #86efac;
+
             border-radius: 10px;
+
             padding: 20px;
+
             text-align: center;
+
             color: #166534;
+
         }
+
+
 
         /* =========================
+
            HỦY ĐƠN
+
         ========================= */
 
+
+
         .cancel-box {
+
             border: 1px solid #fecaca;
+
             background: #fffafa;
+
         }
+
+
 
         .cancel-content {
+
             background: #fef2f2;
+
             border: 1px solid #fecaca;
+
             border-radius: 10px;
+
             padding: 20px;
+
             text-align: center;
+
         }
+
+
 
         .cancel-content p {
+
             margin-top: 0;
+
             color: #7f1d1d;
+
         }
+
+
 
         .cancel-button {
+
             display: inline-block;
+
             padding: 13px 25px;
+
             background: #dc2626;
+
             color: white;
+
             text-decoration: none;
+
             border-radius: 8px;
+
             font-weight: bold;
+
             border: none;
+
             cursor: pointer;
+
             font-size: 14px;
+
         }
+
+
 
         .cancel-button:hover {
+
             background: #b91c1c;
+
         }
 
+
+
         footer {
+
             margin-top: 50px;
+
             background: #111827;
+
             color: white;
+
             text-align: center;
+
             padding: 25px;
+
         }
+
+
 
         @media (max-width: 700px) {
 
+
+
             .navbar {
+
                 flex-direction: column;
+
                 gap: 15px;
+
             }
+
+
 
             .menu {
+
                 flex-wrap: wrap;
+
                 justify-content: center;
+
             }
+
+
 
             .info-grid {
+
                 grid-template-columns: 1fr;
+
             }
 
+
+
             .product {
+
                 flex-wrap: wrap;
+
             }
+
+
 
         }
 
+
+
     </style>
 
+
+
 </head>
+
+
+
 
 
 <body>
 
 
+
+
+
 <!-- =========================
+
      NAVBAR
-========================= -->
+
+\========================= -->
+
+
 
 <nav class="navbar">
 
+
+
     <div class="logo">
+
         🛒 Cong Store
+
     </div>
+
+
 
     <div class="menu">
 
+
+
         <a href="{% url 'home' %}">
+
             🏠 Trang chủ
+
         </a>
+
+
 
         <a href="{% url 'cart' %}">
+
             🛒 Giỏ hàng
+
         </a>
+
+
 
         <a href="{% url 'orders' %}">
+
             📦 Đơn hàng
+
         </a>
+
+
 
         <a href="{% url 'profile' %}">
+
             👤 Tài khoản
+
         </a>
 
+
+
         <a href="{% url 'logout' %}">
+
             Đăng xuất
+
         </a>
+
+
 
     </div>
 
+
+
 </nav>
+
+
+
 
 
 <div class="container">
 
 
+
+
+
     <!-- QUAY LẠI -->
 
+
+
     <a href="{% url 'orders' %}" class="back">
+
         ← Quay lại danh sách đơn hàng
+
     </a>
+
+
+
 
 
     <!-- TIÊU ĐỀ -->
 
+
+
     <div class="title">
 
+
+
         <h1>
+
             📦 Chi tiết đơn hàng
+
         </h1>
 
+
+
         <p>
+
             Xem thông tin và sản phẩm trong đơn hàng của bạn
+
         </p>
+
+
 
     </div>
 
 
+
+
+
     <!-- =========================
+
          THÔNG TIN ĐƠN
+
     ========================= -->
+
+
 
     <div class="box">
 
+
+
         <div class="order-header">
 
+
+
             <div class="order-id">
+
                 Đơn hàng #{{ order.id }}
+
             </div>
+
+
+
 
 
             {% if order.status == 'pending' %}
 
+
+
                 <div class="status"
+
                      style="
+
                         background:#fef3c7;
+
                         color:#92400e;
+
                      ">
+
                     ⏳ Chờ xác nhận
+
                 </div>
+
+
 
             {% elif order.status == 'confirmed' %}
 
+
+
                 <div class="status"
+
                      style="
+
                         background:#dcfce7;
+
                         color:#166534;
+
                      ">
+
                     ✓ Đã xác nhận
+
                 </div>
+
+
 
             {% elif order.status == 'shipping' %}
 
+
+
                 <div class="status"
+
                      style="
+
                         background:#dbeafe;
+
                         color:#1d4ed8;
+
                      ">
+
                     🚚 Đang giao
+
                 </div>
+
+
 
             {% elif order.status == 'delivered' %}
 
+
+
                 <div class="status"
+
                      style="
+
                         background:#e0e7ff;
+
                         color:#4338ca;
+
                      ">
+
                     📦 Đã giao
+
                 </div>
+
+
 
             {% elif order.status == 'completed' %}
 
+
+
                 <div class="status"
+
                      style="
+
                         background:#dcfce7;
+
                         color:#166534;
+
                      ">
+
                     ✅ Hoàn thành
+
                 </div>
+
+
 
             {% elif order.status == 'cancelled' %}
 
+
+
                 <div class="status"
+
                      style="
+
                         background:#fee2e2;
+
                         color:#991b1b;
+
                      ">
+
                     ❌ Đã hủy
+
                 </div>
+
+
 
             {% else %}
 
+
+
                 <div class="status">
+
                     {{ order.get_status_display }}
+
                 </div>
+
+
 
             {% endif %}
 
+
+
         </div>
+
+
 
     </div>
 
 
+
+
+
     <!-- =========================
+
          THÔNG TIN NHẬN HÀNG
+
     ========================= -->
+
+
 
     <div class="box">
 
+
+
         <h2>
+
             👤 Thông tin nhận hàng
+
         </h2>
+
+
 
         <div class="info-grid">
 
 
+
+
+
             <div class="info-item">
 
+
+
                 <strong>
+
                     Họ và tên
+
                 </strong>
+
+
 
                 {{ order.full_name }}
 
+
+
             </div>
+
+
+
 
 
             <div class="info-item">
 
+
+
                 <strong>
+
                     Số điện thoại
+
                 </strong>
+
+
 
                 {{ order.phone }}
 
+
+
             </div>
+
+
+
 
 
             <div class="info-item">
 
+
+
                 <strong>
+
                     Địa chỉ
+
                 </strong>
+
+
 
                 {{ order.address }}
 
+
+
             </div>
+
+
+
 
 
             <div class="info-item">
 
+
+
                 <strong>
+
                     Ngày đặt hàng
+
                 </strong>
+
+
 
                 {{ order.created_at|date:"d/m/Y H:i" }}
 
+
+
             </div>
+
+
+
 
 
             <div class="info-item">
 
+
+
                 <strong>
+
                     Thanh toán
+
                 </strong>
+
+
 
                 {{ order.get_payment_method_display }}
 
+
+
             </div>
+
+
+
 
 
         </div>
 
+
+
     </div>
 
 
+
+
+
     <!-- =========================
+
          SẢN PHẨM
+
     ========================= -->
+
+
 
     <div class="box">
 
+
+
         <h2>
+
             🛍️ Sản phẩm
+
         </h2>
+
+
+
 
 
         {% for item in order.items.all %}
 
+
+
         <div class="product">
+
+
+
 
 
             {% if item.product.image %}
 
+
+
                 <img
+
                     src="{{ item.product.image.url }}"
+
                     class="product-image"
+
                     alt="{{ item.product.name }}"
+
                 >
+
+
 
             {% else %}
 
+
+
                 <div class="product-image"></div>
 
+
+
             {% endif %}
+
+
+
 
 
             <div class="product-info">
 
+
+
                 <div class="product-name">
+
                     {{ item.product.name }}
+
                 </div>
+
+
+
 
 
                 <div class="product-detail">
 
+
+
                     Số lượng:
+
                     <strong>
+
                         {{ item.quantity }}
+
                     </strong>
+
+
 
                     &nbsp; × &nbsp;
 
+
+
                     {{ item.price|floatformat:0 }}đ
+
+
 
                 </div>
 
+
+
             </div>
+
+
+
 
 
             <div class="product-price">
 
+
+
                 {{ item.subtotal|floatformat:0 }}đ
+
+
 
             </div>
 
 
+
+
+
         </div>
+
+
 
         {% empty %}
 
+
+
         <p>
+
             Đơn hàng chưa có sản phẩm.
+
         </p>
+
+
 
         {% endfor %}
 
 
+
+
+
         <!-- TỔNG TIỀN -->
+
+
 
         <div class="summary">
 
 
+
+
+
             <div class="summary-row">
 
-                <span>
-                    Tạm tính
-                </span>
+
 
                 <span>
-                    {{ order.total|add:order.discount|floatformat:0 }}đ
+
+                    Tạm tính
+
                 </span>
+
+
+
+                <span>
+
+                    {{ order.total|add:order.discount|floatformat:0 }}đ
+
+                </span>
+
+
 
             </div>
+
+
+
 
 
             {% if order.discount > 0 %}
 
+
+
             <div class="summary-row discount">
 
-                <span>
-                    Giảm giá
-                </span>
+
 
                 <span>
-                    -{{ order.discount|floatformat:0 }}đ
+
+                    Giảm giá
+
                 </span>
+
+
+
+                <span>
+
+                    -{{ order.discount|floatformat:0 }}đ
+
+                </span>
+
+
 
             </div>
+
+
 
             {% endif %}
 
 
+
+
+
             <div class="summary-row total">
 
-                <span>
-                    Tổng thanh toán
-                </span>
+
 
                 <span>
-                    {{ order.total|floatformat:0 }}đ
+
+                    Tổng thanh toán
+
                 </span>
+
+
+
+                <span>
+
+                    {{ order.total|floatformat:0 }}đ
+
+                </span>
+
+
 
             </div>
 
 
+
+
+
         </div>
 
+
+
     </div>
+
+
+
 
 
     <!-- =========================
+
          GHI CHÚ
+
     ========================= -->
+
+
 
     {% if order.note %}
 
+
+
     <div class="box">
 
+
+
         <h2>
+
             📝 Ghi chú
+
         </h2>
 
+
+
         <div class="note">
+
             {{ order.note }}
+
         </div>
 
+
+
     </div>
+
+
 
     {% endif %}
 
 
+
+
+
     <!-- =========================
+
          XÁC NHẬN THANH TOÁN QR
+
     ========================= -->
+
+
 
     {% if order.status == 'pending' and order.payment_method == 'qr' %}
 
+
+
     <div class="box">
 
+
+
         <h2>
+
             💳 Xác nhận thanh toán
+
         </h2>
+
+
+
 
 
         <div class="payment-pending">
 
+
+
             <p>
 
+
+
                 Sau khi bạn đã chuyển khoản bằng mã QR,
+
                 hãy bấm nút bên dưới để xác nhận.
+
+
 
             </p>
 
 
-            <a
-                href="{% url 'confirm_payment' order.id %}"
-                class="confirm-payment-button"
-            >
-                ✓ Tôi đã thanh toán
-            </a>
+
+
+
+            <form method="post" action="{% url 'confirm_payment' order.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="confirm-payment-button" style="border:none; cursor:pointer; font-size:14px;">
+                    ✓ Tôi đã thanh toán
+                </button>
+            </form>
+
+
+
 
 
         </div>
 
+
+
     </div>
+
+
 
     {% elif order.status == 'confirmed' and order.payment_method == 'qr' %}
 
+
+
     <div class="box">
 
+
+
         <h2>
+
             ✅ Thanh toán
+
         </h2>
+
+
+
 
 
         <div class="payment-confirmed">
 
+
+
             <strong>
+
                 ✓ Đã xác nhận thanh toán
+
             </strong>
+
+
+
 
 
             <p style="margin-bottom:0;">
 
+
+
                 Đơn hàng của bạn đã được xác nhận thanh toán.
+
+
 
             </p>
 
+
+
         </div>
 
+
+
     </div>
+
+
 
     {% endif %}
 
 
+
+
+
     <!-- =========================
+
          HỦY ĐƠN HÀNG
+
          CHỈ HIỆN KHI PENDING
+
     ========================= -->
+
+
 
     {% if order.status == 'pending' %}
 
+
+
     <div class="box cancel-box">
 
+
+
         <h2>
+
             ❌ Hủy đơn hàng
+
         </h2>
+
+
+
 
 
         <div class="cancel-content">
 
+
+
             <p>
 
+
+
                 Bạn có chắc chắn muốn hủy đơn hàng
+
                 <strong>#{{ order.id }}</strong>?
+
+
 
                 <br>
 
+
+
                 Sau khi hủy, số lượng sản phẩm sẽ được
+
                 trả lại kho.
+
+
 
             </p>
 
 
-            <a
-                href="{% url 'cancel_order' order.id %}"
-                class="cancel-button"
-                onclick="return confirm(
-                    'Bạn có chắc chắn muốn hủy đơn hàng #{{ order.id }} không?'
-                );"
-            >
-                ❌ Hủy đơn hàng
-            </a>
+
+
+
+            <form method="post" action="{% url 'cancel_order' order.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="cancel-button"
+                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng #{{ order.id }} không?');">
+                    ❌ Hủy đơn hàng
+                </button>
+            </form>
+
+
+
 
 
         </div>
 
+
+
     </div>
 
+
+
     {% endif %}
+
+
+
 
 
 </div>
 
 
+
+
+
 <!-- =========================
+
      FOOTER
-========================= -->
+
+\========================= -->
+
+
 
 <footer>
 
-    <p>
-        © 2026 Cong Store
-    </p>
+
 
     <p>
-        Cửa hàng thời trang trực tuyến
+
+        © 2026 Cong Store
+
     </p>
+
+
+
+    <p>
+
+        Cửa hàng thời trang trực tuyến
+
+    </p>
+
+
 
 </footer>
 
 
+
+
+
 </body>
 
+
+
 </html>
-```
