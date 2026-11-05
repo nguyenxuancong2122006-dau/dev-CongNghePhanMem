@@ -1504,7 +1504,9 @@
                 <div class="product-bottom">
 
                     <div class="price">
-                        <span class="product-price" data-price="{{ product.price|floatformat:0 }}">{{ product.price|floatformat:0 }}</span>đ
+                        <span class="product-price">
+                            {{ product.price|floatformat:0|intcomma }}
+                        </span>đ
                     </div>
 
 
